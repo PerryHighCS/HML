@@ -1,0 +1,127 @@
+.wrapper {
+    margin: 20px 20px 20px;
+}
+
+.linenumcell {
+    width: 1px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.instruction {
+    display: block;
+    border: 1px solid black;
+    border-radius: 3px;
+    vertical-align: middle;
+    padding: 3px;
+    width: fit-content;
+    margin: 5px;
+}
+
+.instructioncell .instruction {
+    margin: 0px;
+}
+
+.fillin {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: .5em;
+    vertical-align: middle;
+    padding: 2px;
+}
+
+.fillin a,
+.fillin a:hover,
+.fillin a:active,
+.fillin a:focus {
+    text-decoration: none;
+    color: #000;
+}
+
+.fillin.hand {
+    background-color: #4da6ff;
+}
+
+.fillin.dir {
+    background-color: #66ff33;
+}
+
+.fillin.pos,
+.fillin.value,
+.fillin.linenum {
+    background-color: #FEDC44;    
+}
+
+.condition {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 1em;
+    vertical-align: middle;
+    padding: 2px;
+}
+
+#trashcan {
+    height: 64px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-left: 20px;
+}
+
+.programEditor {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#program {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 50%;
+    margin-bottom: 0px;
+    
+    border: 1px solid black;
+}
+
+.codeTitle {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+#carddeck {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    border-spacing: 3px;
+    border-collapse: separate;
+}
+
+.cardIndex {
+    text-align: center;
+    border: 1px solid black;
+    vertical-align: top;
+}
+
+.handCell {
+    text-align: center;
+    vertical-align: top;
+    width: 12.5%;
+    max-width: 12.5%;
+}
+
+.handpos {
+    font-size: 50px;
+    margin-top: 5px;
+}
+
+.lefthand {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+#run {
+    margin-bottom: 5px;
+}

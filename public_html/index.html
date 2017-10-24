@@ -1,0 +1,444 @@
+<html>
+    <head>
+        <title>The Human Machine Language</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/hml.css" />
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    </head>
+    <body>
+       
+        <div class="wrapper">
+            <div><h1>The Human Machine Language</h1></div>
+            
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#inst">Program It</a></li>
+                <li><a data-toggle="tab" href="#run">Try It</a></li>
+            </ul>
+            <div class="tab-content">
+                
+                <div id="inst" class="tab-pane fade in active">
+                    <h4>Instruction Toolbox:</h4>
+                    <div class="instruction shift" draggable="true" ondragstart="dragInstruction(event)" >
+                        SHIFT 
+                        <div class="fillin hand dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hand
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Right Hand</a></li>
+                              <li><a href="#">Left Hand</a></li>
+                            </ul>
+                        </div>
+                        TO THE 
+                        <div class="fillin dir dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Direction
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Right</a></li>
+                              <li><a href="#">Left</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="instruction move" draggable="true" ondragstart="dragInstruction(event)">
+                        MOVE 
+                        <div class="fillin hand dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hand
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Right Hand</a></li>
+                              <li><a href="#">Left Hand</a></li>
+                            </ul>
+                        </div>
+                        TO POSITION 
+                        <div class="fillin pos dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Position
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Right Hand Position</a></li>
+                              <li><a href="#">Left Hand Position</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">0</a></li>
+                              <li><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#">6</a></li>
+                              <li><a href="#">7</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="instruction jump" draggable="true" ondragstart="dragInstruction(event)">
+                        JUMP TO LINE
+                        <div class="fillin linenum dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Line #
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">1</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="instruction jumpif" draggable="true" ondragstart="dragInstruction(event)">
+                        JUMP TO LINE
+                        <div class="fillin linenum dropdown">
+                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Line #
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">1</a></li>
+                            </ul>
+                        </div>
+                        IF
+                        <div class="condition">
+                            &nbsp;
+                            <div class="fillin value dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Value
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Right Hand Card</a></li>
+                                    <li><a href="#">Left Hand Card</a></li>
+                                    <li><a href="#">Right Hand Card</a></li>
+                                    <li><a href="#">Left Hand Card</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">0</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="#">8</a></li>
+                                    <li><a href="#">9</a></li>
+                                    <li><a href="#">10</a></li>
+                                </ul>
+                            </div>
+                            &nbsp;
+                            <div class="fillin comparison dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    compare
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">&gt;</a></li>
+                                    <li><a href="#">&lt;</a></li>
+                                    <li><a href="#">=</a></li> 
+                                    <li><a href="#">&ne;</a></li> 
+                                    <li><a href="#">&le;</a></li>
+                                    <li><a href="#">&ge;</a></li>  
+                                </ul>
+                            </div>
+                            &nbsp;
+                            <div class="fillin value dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Value
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Right Hand Card</a></li>
+                                    <li><a href="#">Left Hand Card</a></li>
+                                    <li><a href="#">Right Hand Card</a></li>
+                                    <li><a href="#">Left Hand Card</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">0</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="#">8</a></li>
+                                    <li><a href="#">9</a></li>
+                                    <li><a href="#">10</a></li>
+                                </ul>
+                            </div>
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="instruction stop" draggable="true" ondragstart="dragInstruction(event)">
+                        STOP
+                    </div>
+
+                    <div class="instruction swap" draggable="true" ondragstart="dragInstruction(event)">
+                        SWAP
+                    </div>
+                </div>
+                
+                <div id="run" class="tab-pane fade">
+                    
+                    <table id="carddeck" class="table">                        
+                        
+                    </table>
+                    
+                    <button class="btn btn-success runbtn" onclick="runIt()">
+                        <span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program
+                    </button>
+                    <button class="btn btn-danger stopbtn" onclick="stopIt()">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Stop Program
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-success" onclick="deal()">
+                        Redeal Cards
+                    </button>
+                    
+                </div>
+            </div>
+            
+            <div class="programEditor">
+                
+                <table class="table table-striped" id="program">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Program Code</th>
+                        </tr>
+                        <tr>
+                            <th class="linenumcell">Line #</th>
+                            <th>Instruction</th>
+                        </tr>                
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="linenumcell">1</td>
+                            <td class="instructioncell" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="trash.png" id="trashcan" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+        </div>
+        <script>
+            // The html for a blank program line
+            var instRow = "<tr><td class='linenumcell'>" + 
+                            "</td><td  class='instructioncell' " + 
+                            "ondrop='drop(event)' ondragover='allowDrop(event)'>" + 
+                            "</td></tr>";
+                            
+            /**
+             * Allow an instruction to be dropped on this element
+             * 
+             * @param {DropEvent} ev
+             */
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+
+            /** 
+             * Handle an instruction being dragged
+             * 
+             * @param {DragEvent} ev
+             */
+            function dragInstruction(ev) {
+                let item = $(ev.target);
+                
+                if (!(item.is(".instruction"))) {
+                    item = item.parents(".instruction");
+                }
+                
+                let source = "instructionBank";
+                let lineno = -1;
+                
+                if (item.parents("#program").length > 0) {                    
+                    source = "program";                    
+                    lineno = $(item.parents("tbody")).find("tr").index(item.parents("tr")) + 1;
+                }
+                
+                let data = {
+                            src: source,
+                            line: lineno,
+                            item: item.clone(true, true)[0].outerHTML
+                           };
+                        
+                ev.dataTransfer.setData("text", JSON.stringify(data));
+            }
+
+            /**
+             * Handle an instruction being dropped onto another element
+             * @param {DropEvent} ev
+             */
+            function drop(ev) {
+                ev.preventDefault();
+                
+                // Get the item being dropped
+                let data = JSON.parse(ev.dataTransfer.getData("text"));
+                // and the place it was dropped
+                let target = $(ev.target);
+                
+                if (!(target.is('#trashcan') || target.is('td'))) {
+                    // If the drop location was not a table cell
+
+                    // Find the parent table cell
+                    target = target.parents("td");
+                }
+                
+                // If dragging from the program and the ctrl or shift Key wasn't pressed
+                if (data.src === "program" && !(ev.ctrlKey === true || ev.shiftKey === true)) {
+                    // delete the original instruction
+                    $($("#program tbody tr")[data.line - 1]).find(".instructioncell").empty();
+                }
+                
+                // If the target isn't the trashcan
+                if (!target.is('#trashcan')) {
+                    
+                    // Find out what line number the instruction was dropped on
+                    let targetLine = target.parents("tbody").find("tr").index(target.parents("tr")) + 1;
+
+                    // And the current number of lines
+                    let numLines = $("#program tbody tr").length;
+                    
+                    // If the target is currently empty
+                    if (target.has('.instruction').length === 0 ){
+                        // add the instruction to the target
+                        target.append(data.item);
+                    }
+                    else {
+                        // If there was an instruction where the new one was dropped
+                        // Create a new row
+                        
+                        let curRow = target.parents("tr");
+                        
+                        curRow.before(instRow);
+                        
+                        let newRow = curRow.parents("tbody").find("tr").index(curRow) - 1;
+                        
+                        $(curRow.parents("tbody").find("tr")[newRow]).find(".instructioncell").append(data.item);
+                        
+                    }
+                    
+                     
+                }
+                
+                // Update all instruction(s) dropdowns
+                compactLines();
+                setLineNumbers();
+                addDropdownHandlers();                
+            }
+            
+            
+            function compactLines() {
+                $("#program .instructioncell").each( function() {
+                    if ($(this).has(".instruction").length === 0) {
+                        $(this).parent("tr").remove();
+                    }
+                });
+                                     
+                $("#program tbody").append(instRow);
+            }
+            
+            /**
+             * Add click handlers to all dropdown items that replace the text in
+             * the dropdown with the selection
+             */
+            function addDropdownHandlers() {
+                // Find all dropdown items, set their click function
+                $("#program .dropdown-menu li a").click(function(){
+                    // when an item is clicked, find the dropdown-text
+                    $(this).parents(".dropdown").find('.dropdown-text')
+                            // and fill it with the selected item
+                            .html($(this).text() + ' <span class="caret"></span>');
+                });                
+            }
+            
+            /**
+             * Set the available line numbers in all line number dropdowns and 
+             * on all program lines
+             */
+            function setLineNumbers() {
+                let numLines = $("#program tbody tr").length;
+            
+                $(".linenum ul").each(function() {
+                    $(this).empty();
+
+                    for (let i = 1; i <= numLines; i++) {
+                        $(this).append("<li><a href='#'>" + i + "</a></li>");
+                    }
+                });
+                
+                $("tbody .linenumcell").each(function() {
+                    $(this).html($(this).parents("tbody").find("tr").index($(this).parents("tr")) + 1);
+                });
+            }
+            
+        </script>
+        
+        <script>
+            function deal() {
+                $("#carddeck").empty();
+                
+                let tr = $("<tr class='cards'/>");
+                let tr2 = $("<tr/>");
+                let tr3 = $("<tr/>");
+                
+                $("#carddeck").append(tr);
+                $("#carddeck").append(tr2);                
+                $("#carddeck").append(tr3);
+                
+                let deck = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+                
+                for (let i = 0; i < deck.length; i++) {
+                    let newPos = Math.floor(Math.random() * deck.length);
+                    
+                    let card = deck[i];
+                    deck[i] = deck[newPos];
+                    deck[newPos] = card;
+                }
+                
+                let suit = "hdcs".charAt(Math.floor(Math.random() * 4));
+                for (let i = 0; i < deck.length - 1; i++) {
+                    tr.append("<td><img src='cards/card-" + suit + deck[i] +
+                            ".png' class='card'></td>");
+                    tr2.append("<th class='cardIndex'>" + i + "</th>");
+                    tr3.append("<th class='handCell'></th>");
+                }             
+                
+                moveHand(0, 0);
+                moveHand(1, 1);
+            }
+            
+            function moveHand(hand, pos) {
+                if (hand === 0) {
+                    $('.lefthand').remove();
+                    hand = "lefthand";
+                }
+                else {
+                    $('.righthand').remove();
+                    hand = "righthand";
+                }
+                
+                let code = $("<div class='glyphicon glyphicon-hand-up handpos " + hand + "'></div>");
+                
+                $($('.handCell')[pos]).append(code);
+            }
+            
+            deal();
+        </script>
+        <script>
+            
+            function runIt() {
+                $('.runbtn').hide();
+                $('.stopbtn').show();
+            }
+            
+            function stopIt() {
+                $('.runbtn').show();
+                $('.stopbtn').hide();
+            }
+            
+            stopIt();
+        </script>
+    </body>
+</html>
