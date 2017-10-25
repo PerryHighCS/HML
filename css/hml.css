@@ -32,6 +32,8 @@ li.active .tabButtons {
     margin-left: 20px;
     
     overflow-y: auto;
+    
+    z-index: -100;
 }
 
 #directions h1 {
@@ -54,16 +56,12 @@ li.active .tabButtons {
 }
 
 .instruction {
-    display: block;
     border: 1px solid black;
     border-radius: 3px;
     vertical-align: middle;
     padding: 3px;
     width: fit-content;
     margin: 5px;
-}
-
-.instruction {
     display: inline-block;
 }
 
