@@ -198,6 +198,7 @@ tr.lastLine {
 /* Make the copy button pretty */
 .copybutton {
     float: right;
+    cursor: pointer;
 }
 
 /* Make the copy button highlight when clicked */
