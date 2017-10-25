@@ -130,7 +130,7 @@ li.active .tabButtons {
     margin-bottom: 0px;
 }
 
-#carddeck {
+#cardboard {
     width: 100%;
     text-align: center;
     margin-top: 10px;
@@ -171,4 +171,12 @@ li.active .tabButtons {
 
 #inst {
     margin-bottom: 5px;
+}
+
+tr.currentLine {
+    background: #66ff33 !important;
+}
+
+tr.lastLine {
+    background: #4da6ff !important;
 }
