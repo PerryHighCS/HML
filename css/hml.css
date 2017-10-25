@@ -65,6 +65,7 @@ li.active .tabButtons {
     width: fit-content;
     margin: 5px;
     display: inline-block;
+    background-color: #fff;
 }
 
 .instructioncell .instruction {
