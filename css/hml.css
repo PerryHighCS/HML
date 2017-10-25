@@ -177,6 +177,9 @@ tr.lastLine {
     background: #4da6ff !important;
 }
 
+.copybutton {
+     float: right;
+}
 /* Fork on github ribbon */
 .github-corner:hover .octo-arm {
     animation:octocat-wave 560ms ease-in-out
