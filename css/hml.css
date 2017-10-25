@@ -1,3 +1,4 @@
+/* position the toolbox at the top of the screen */
 .toolbox {
     position: fixed;
     top: 0px;
@@ -7,22 +8,25 @@
     padding-right: 20px;
 }
 
+/* Shrink the try-it tab's padding to accomodate buttons when it is active '*/
 .tryIt.active a.tryIt {
     padding-top: 3px;
     padding-bottom: 3px;
 }
 
+/* Show the buttons in the try-it tab visible when the tab is selected */
 li.active .tabButtons {
     display: inline-block;
 }
 
+/* hide the tab-buttons by default */
 .tabButtons {
     display: none;
 }
 
+/* Move the content below the toolbox */
 .wrapper {
     position: absolute;
-    
     top: 238px;
     bottom: 0px;
     left: 0px;
@@ -34,25 +38,25 @@ li.active .tabButtons {
     overflow-y: auto;
 }
 
+/* Move the heading in the directions up */
 #directions h1 {
     margin-top: 5px;
 }
 
+/* Make linenumber cells as narrow as possible */
 .linenumcell {
     width: 1px;
     white-space: nowrap;
     text-align: center;
 }
 
+/* position the tool palette */
 .palette {
     display: block;
     margin-left: 20px;
 }
 
-.commands {
-    
-}
-
+/* make the instruction blocks into blocks */
 .instruction {
     border: 1px solid black;
     border-radius: 3px;
@@ -67,6 +71,7 @@ li.active .tabButtons {
     margin: 0px;
 }
 
+/* make fillins look like blocks in the instruction */
 .fillin {
     display: inline-block;
     border: 1px solid black;
@@ -75,6 +80,7 @@ li.active .tabButtons {
     padding: 2px;
 }
 
+/* remove the underline from fillins */
 .fillin a,
 .fillin a:hover,
 .fillin a:active,
@@ -83,6 +89,7 @@ li.active .tabButtons {
     color: #000;
 }
 
+/* color the fillin blocks */
 .fillin.hand {
     background-color: #4da6ff;
 }
@@ -105,12 +112,14 @@ li.active .tabButtons {
     padding: 2px;
 }
 
+/* Set the size and position of the trashcan */
 #trashcan {
     height: 64px;
     float: right;
     margin-left: 20px;
 }
 
+/* The program editor should fill the rest of the screen */
 .programEditor {
     width: 100%;
 }
@@ -126,6 +135,7 @@ li.active .tabButtons {
     margin-bottom: 0px;
 }
 
+/* Format the card table */
 #cardboard {
     width: 100%;
     text-align: center;
@@ -135,23 +145,27 @@ li.active .tabButtons {
     border-collapse: separate;
 }
 
+/* Draw pretty borders around the card positions */
 .cardIndex {
     text-align: center;
     border: 1px solid black;
     vertical-align: top;
 }
 
+/* Keep the hands in the center of their cells */
 .handCell {
     text-align: center;
     width: 12.5%;
     max-width: 12.5%;
 }
 
+/* Make the hands BIG and make them touch the cards */
 .handpos {
     font-size: 50px;
     margin-top: -4px;
 }
 
+/* Flip the lefthand to make it an L */
 .lefthand {
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -161,6 +175,7 @@ li.active .tabButtons {
     -ms-filter: "FlipH";
 }
 
+/* give space below the run and instruction tabs */
 #run {
     margin-bottom: 5px;
 }
@@ -169,23 +184,27 @@ li.active .tabButtons {
     margin-bottom: 5px;
 }
 
+/* Highlight the currently executing line of code */
 tr.currentLine {
     background: #66ff33 !important;
 }
 
+/* Highlight the last executed line of code */
 tr.lastLine {
     background: #4da6ff !important;
 }
 
+/* Make the copy button pretty */
 .copybutton {
     float: right;
 }
 
+/* Make the copy button highlight when clicked */
 .copybutton:active {
     color: #4da6ff;
 }
 
-/* Fork on github ribbon */
+/* Fork on github corner mark */
 .github-corner:hover .octo-arm {
     animation:octocat-wave 560ms ease-in-out
 }
@@ -199,7 +218,6 @@ tr.lastLine {
         animation:octocat-wave 560ms ease-in-out
     }
 }
-
 .github-corner {
     z-index: 10;
     position: absolute;
