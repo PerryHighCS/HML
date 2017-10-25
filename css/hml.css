@@ -1,5 +1,24 @@
+.toolbox {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .wrapper {
-    margin: 20px 20px 20px;
+    position: absolute;
+    
+    top: 372px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    
+    margin-right: 20px;
+    margin-left: 20px;
+    
+    overflow-y: auto;
 }
 
 .linenumcell {
@@ -8,14 +27,24 @@
     text-align: center;
 }
 
-.instruction {
+.palette {
+    display: inline-block;
+    margin-left: 20px;
+}
 
+.instruction {
+    display: block;
     border: 1px solid black;
     border-radius: 3px;
     vertical-align: middle;
     padding: 3px;
     width: fit-content;
     margin: 5px;
+}
+
+.instruction.stop,
+.instruction.swap {
+    display: inline-block;
 }
 
 .instructioncell .instruction {
@@ -68,17 +97,12 @@
 }
 
 .programEditor {
-    display: flex;
-    flex-direction: row;
     width: 100%;
 }
 
 #program {
-    width: auto;
-    flex: 1 1 0;
-    min-width: 50%;
+    width: 100%;
     margin-bottom: 0px;
-    
     border: 1px solid black;
 }
 
@@ -123,5 +147,9 @@
 }
 
 #run {
+    margin-bottom: 5px;
+}
+
+#inst {
     margin-bottom: 5px;
 }

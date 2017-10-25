@@ -12,178 +12,181 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     </head>
     <body>
-       
-        <div class="wrapper">
+        <div class="toolbox">
             <div><h1>The Human Machine Language</h1></div>
-            
+
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#inst">Program It</a></li>
                 <li><a data-toggle="tab" href="#run">Try It</a></li>
             </ul>
             <div class="tab-content">
-                
+
                 <div id="inst" class="tab-pane fade in active">
                     <h4>Instruction Toolbox:</h4>
-                    <div class="instruction shift" draggable="true" ondragstart="dragInstruction(event)" >
-                        SHIFT 
-                        <div class="fillin hand dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Hand
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Right Hand</a></li>
-                              <li><a href="#">Left Hand</a></li>
-                            </ul>
-                        </div>
-                        TO THE 
-                        <div class="fillin dir dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Direction
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Right</a></li>
-                              <li><a href="#">Left</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="instruction move" draggable="true" ondragstart="dragInstruction(event)">
-                        MOVE 
-                        <div class="fillin hand dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Hand
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Right Hand</a></li>
-                              <li><a href="#">Left Hand</a></li>
-                            </ul>
-                        </div>
-                        TO POSITION 
-                        <div class="fillin pos dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Position
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Right Hand Position</a></li>
-                              <li><a href="#">Left Hand Position</a></li>
-                              <li class="divider"></li>
-                              <li><a href="#">0</a></li>
-                              <li><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                              <li><a href="#">6</a></li>
-                              <li><a href="#">7</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="instruction jump" draggable="true" ondragstart="dragInstruction(event)">
-                        JUMP TO LINE
-                        <div class="fillin linenum dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Line #
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">1</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="instruction jumpif" draggable="true" ondragstart="dragInstruction(event)">
-                        JUMP TO LINE
-                        <div class="fillin linenum dropdown">
-                            <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Line #
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">1</a></li>
-                            </ul>
-                        </div>
-                        IF
-                        <div class="condition">
-                            &nbsp;
-                            <div class="fillin value dropdown">
+                    <img src="trash.png" id="trashcan" draggable="false" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="palette">
+                        <div class="instruction shift" draggable="true" ondragstart="dragInstruction(event)" >
+                            SHIFT 
+                            <div class="fillin hand dropdown">
                                 <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Value
+                                    Hand
                                 <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Right Hand Card</a></li>
-                                    <li><a href="#">Left Hand Card</a></li>
-                                    <li><a href="#">Right Hand Card</a></li>
-                                    <li><a href="#">Left Hand Card</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">0</a></li>
+                                  <li><a href="#">Right Hand</a></li>
+                                  <li><a href="#">Left Hand</a></li>
+                                </ul>
+                            </div>
+                            TO THE 
+                            <div class="fillin dir dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Direction
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Right</a></li>
+                                  <li><a href="#">Left</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="instruction move" draggable="true" ondragstart="dragInstruction(event)">
+                            MOVE 
+                            <div class="fillin hand dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hand
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Right Hand</a></li>
+                                  <li><a href="#">Left Hand</a></li>
+                                </ul>
+                            </div>
+                            TO POSITION 
+                            <div class="fillin pos dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Position
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Right Hand Position</a></li>
+                                  <li><a href="#">Left Hand Position</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="#">0</a></li>
+                                  <li><a href="#">1</a></li>
+                                  <li><a href="#">2</a></li>
+                                  <li><a href="#">3</a></li>
+                                  <li><a href="#">4</a></li>
+                                  <li><a href="#">5</a></li>
+                                  <li><a href="#">6</a></li>
+                                  <li><a href="#">7</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="instruction jump" draggable="true" ondragstart="dragInstruction(event)">
+                            JUMP TO LINE
+                            <div class="fillin linenum dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Line #
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">1</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="instruction jumpif" draggable="true" ondragstart="dragInstruction(event)">
+                            JUMP TO LINE
+                            <div class="fillin linenum dropdown">
+                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Line #
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
                                     <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#">7</a></li>
-                                    <li><a href="#">8</a></li>
-                                    <li><a href="#">9</a></li>
-                                    <li><a href="#">10</a></li>
                                 </ul>
                             </div>
-                            &nbsp;
-                            <div class="fillin comparison dropdown">
-                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    compare
-                                <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">&gt;</a></li>
-                                    <li><a href="#">&lt;</a></li>
-                                    <li><a href="#">=</a></li> 
-                                    <li><a href="#">&ne;</a></li> 
-                                    <li><a href="#">&le;</a></li>
-                                    <li><a href="#">&ge;</a></li>  
-                                </ul>
+                            IF
+                            <div class="condition">
+                                &nbsp;
+                                <div class="fillin value dropdown">
+                                    <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Value
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Right Hand Card</a></li>
+                                        <li><a href="#">Left Hand Card</a></li>
+                                        <li><a href="#">Right Hand Card</a></li>
+                                        <li><a href="#">Left Hand Card</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">0</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">6</a></li>
+                                        <li><a href="#">7</a></li>
+                                        <li><a href="#">8</a></li>
+                                        <li><a href="#">9</a></li>
+                                        <li><a href="#">10</a></li>
+                                    </ul>
+                                </div>
+                                &nbsp;
+                                <div class="fillin comparison dropdown">
+                                    <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        compare
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">&gt;</a></li>
+                                        <li><a href="#">&lt;</a></li>
+                                        <li><a href="#">=</a></li> 
+                                        <li><a href="#">&ne;</a></li> 
+                                        <li><a href="#">&le;</a></li>
+                                        <li><a href="#">&ge;</a></li>  
+                                    </ul>
+                                </div>
+                                &nbsp;
+                                <div class="fillin value dropdown">
+                                    <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Value
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Right Hand Card</a></li>
+                                        <li><a href="#">Left Hand Card</a></li>
+                                        <li><a href="#">Right Hand Card</a></li>
+                                        <li><a href="#">Left Hand Card</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">0</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">6</a></li>
+                                        <li><a href="#">7</a></li>
+                                        <li><a href="#">8</a></li>
+                                        <li><a href="#">9</a></li>
+                                        <li><a href="#">10</a></li>
+                                    </ul>
+                                </div>
+                                &nbsp;
                             </div>
-                            &nbsp;
-                            <div class="fillin value dropdown">
-                                <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Value
-                                <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Right Hand Card</a></li>
-                                    <li><a href="#">Left Hand Card</a></li>
-                                    <li><a href="#">Right Hand Card</a></li>
-                                    <li><a href="#">Left Hand Card</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">0</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#">7</a></li>
-                                    <li><a href="#">8</a></li>
-                                    <li><a href="#">9</a></li>
-                                    <li><a href="#">10</a></li>
-                                </ul>
-                            </div>
-                            &nbsp;
+                        </div>
+
+                        <div class="instruction stop" draggable="true" ondragstart="dragInstruction(event)">
+                            STOP
+                        </div>
+
+                        <div class="instruction swap" draggable="true" ondragstart="dragInstruction(event)">
+                            SWAP
                         </div>
                     </div>
-
-                    <div class="instruction stop" draggable="true" ondragstart="dragInstruction(event)">
-                        STOP
-                    </div>
-
-                    <div class="instruction swap" draggable="true" ondragstart="dragInstruction(event)">
-                        SWAP
-                    </div>
+                    
                 </div>
                 
                 <div id="run" class="tab-pane fade">
-                    
+
                     <table id="carddeck" class="table">                        
-                        
+
                     </table>
-                    
+
                     <button class="btn btn-success runbtn" onclick="runIt()">
                         <span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program
                     </button>
@@ -194,12 +197,14 @@
                     <button class="btn btn-success" onclick="deal()">
                         Redeal Cards
                     </button>
-                    
+
                 </div>
             </div>
+        </div>
             
-            <div class="programEditor">
-                
+        <div class="wrapper">
+       
+            <div class="programEditor">                
                 <table class="table table-striped" id="program">
                     <thead>
                         <tr>
@@ -218,7 +223,6 @@
                     </tbody>
                 </table>
 
-                <img src="trash.png" id="trashcan" ondrop="drop(event)" ondragover="allowDrop(event)">
             </div>
         </div>
         <script>
