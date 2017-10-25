@@ -178,8 +178,13 @@ tr.lastLine {
 }
 
 .copybutton {
-     float: right;
+    float: right;
 }
+
+.copybutton:active {
+    color: #4da6ff;
+}
+
 /* Fork on github ribbon */
 .github-corner:hover .octo-arm {
     animation:octocat-wave 560ms ease-in-out
