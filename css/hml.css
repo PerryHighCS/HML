@@ -7,10 +7,23 @@
     padding-right: 20px;
 }
 
+.tryIt.active a.tryIt {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+li.active .tabButtons {
+    display: inline-block;
+}
+
+.tabButtons {
+    display: none;
+}
+
 .wrapper {
     position: absolute;
     
-    top: 372px;
+    top: 238px;
     bottom: 0px;
     left: 0px;
     right: 0px;
@@ -21,6 +34,10 @@
     overflow-y: auto;
 }
 
+#directions h1 {
+    margin-top: 5px;
+}
+
 .linenumcell {
     width: 1px;
     white-space: nowrap;
@@ -28,8 +45,12 @@
 }
 
 .palette {
-    display: inline-block;
+    display: block;
     margin-left: 20px;
+}
+
+.commands {
+    
 }
 
 .instruction {
@@ -42,8 +63,7 @@
     margin: 5px;
 }
 
-.instruction.stop,
-.instruction.swap {
+.instruction {
     display: inline-block;
 }
 
@@ -91,8 +111,7 @@
 
 #trashcan {
     height: 64px;
-    flex-shrink: 0;
-    flex-grow: 0;
+    float: right;
     margin-left: 20px;
 }
 
@@ -114,7 +133,8 @@
 #carddeck {
     width: 100%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 3px;
     border-spacing: 3px;
     border-collapse: separate;
 }
@@ -127,14 +147,13 @@
 
 .handCell {
     text-align: center;
-    vertical-align: top;
     width: 12.5%;
     max-width: 12.5%;
 }
 
 .handpos {
     font-size: 50px;
-    margin-top: 5px;
+    margin-top: -4px;
 }
 
 .lefthand {
