@@ -357,7 +357,8 @@
              * so that their target line numbers have a delta added to them to
              * account for, ie inserted or removed lines of code.
              * 
-             * @param {integer} firstLine the line number to start adjusting on
+             * @param {integer} changeLine the line number to start adjustments
+             *    around
              * 
              * @param {integer} delta the direction and amount to adjust jump
              *  target line numbers
@@ -656,6 +657,7 @@
                         
                         // Mark it as the current line
                         line.addClass('currentLine');
+                        line[0].scrollIntoView();
                         
                         // Run the command
                         if (doCommand(runState, line.find('.instruction')[0])) {
