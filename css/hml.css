@@ -206,6 +206,12 @@ tr.lastLine {
     color: #4da6ff;
 }
 
+#runSlider {
+    display: inline-block;
+    width: 100px;
+    vertical-align: middle;
+    direction: rtl;
+}
 /* Fork on github corner mark */
 .github-corner:hover .octo-arm {
     animation:octocat-wave 560ms ease-in-out
