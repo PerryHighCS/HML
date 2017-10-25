@@ -1089,18 +1089,29 @@
              *                    execution should quit.
              */
             function doSwap(state) {
+                // Don't swap if both hands are in the same position
+                if (state.lHand === state.rHand) {
+                    state.nextLine++;
+                    return true;
+                }
+                
+                // Get the card cell and its value for the left hand
                 let lhTD = $($('.cards td')[state.lHand]);
                 let lhVal = lhTD.attr('value');
                 
+                // Get the card cell and its value for the right hand
                 let rhTD = $($('.cards td')[state.rHand]);
                 let rhVal = rhTD.attr('value');
                 
+                // Empty the cells
                 lhTD.empty();
                 rhTD.empty();
                 
+                // Swap the card values
                 lhTD.attr('value', rhVal);
                 rhTD.attr('value', lhVal);
                 
+                // Swap the card images
                 lhTD.append("<img src='cards/card-" + state.suit + rhVal +
                             ".png' class='card'>");
                 rhTD.append("<img src='cards/card-" + state.suit + lhVal +
