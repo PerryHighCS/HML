@@ -551,7 +551,7 @@
                         runState.lHand = pos;
                     }
                     else {
-                        alert ("Tried to move left hand off table");
+                        alert ("You tried to move the left hand off of the table.");
                         return false;
                     }
                 }
@@ -564,7 +564,7 @@
                         runState.rHand = pos;
                     }
                     else {
-                        alert ("Tried to move right hand off table");
+                        alert ("You tried to move the right hand off of the table.");
                         return false;
                     }
                 }
@@ -831,7 +831,7 @@
                 // If the target is invalid
                 if (isNaN(lineno)) {
                     // Alert the user and quit
-                    alert("Jump target not set!");
+                    alert("You need to set the line to jump TO!");
                     return -1;
                 }
                 
@@ -882,7 +882,7 @@
                                 
                                 // If there is no literal value, there was an error
                                 if (isNaN(val)) {
-                                    alert("Conditional value not set.");
+                                    alert("You need to set a value to compare.");
                                     invalid = true;
                                 }
                                 
@@ -923,7 +923,7 @@
                     case "\u2260":
                         return "!=";    
                     default:
-                        alert("Comparison operator not set.");
+                        alert("You need to set the comparison operator.");
                         return null;
                 }
             }
@@ -996,7 +996,7 @@
                 }
                 
                 // Otherwise, show an error and return an error code
-                alert("Hand to " + command + " not set");
+                alert("You need to set which hand to " + command + ".");
                 return -1;
             }
             
@@ -1019,7 +1019,7 @@
                 }
 
                 // Otherwise, show an error and return an error code
-                alert("Direction to shift hand not set");
+                alert("You need to set a direction to to shift the hand.");
                 return 0;
             }
             
@@ -1049,7 +1049,7 @@
                 }
 
                 // Otherwise, show an error and return an error code
-                alert("Position to move hand to not set");
+                alert("You need to set which card position to move the hand to.");
                 return -1;
             }
             
