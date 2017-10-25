@@ -231,6 +231,16 @@
         </div>
         
         <script>
+            // unlock the swap instruction if asked nicely
+            var url = window.location.href;
+            if ((url.indexOf('?swap') >= 0)||
+                (url.indexOf('&swap') >= 0)) {
+                $('.instruction.swap').show();
+            }
+            else {
+                $('.instruction.swap').hide();
+            }
+            
             // The html for a blank program line
             var instRow = "<tr><td class='linenumcell'>" + 
                             "</td><td  class='instructioncell' " + 
