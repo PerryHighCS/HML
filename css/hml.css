@@ -233,3 +233,24 @@ tr.lastLine {
     right: 0;
     border: 0;
 }
+
+
+/* Set up printing to display code only */
+@media print {
+    .toolbox {
+        display: none;
+    }
+    
+    .wrapper {
+        position: relative;
+        top: 0;
+    }
+    
+    .github-corner {
+        display: none;
+    }
+    
+    .copybutton {
+        display: none;
+    }
+}
