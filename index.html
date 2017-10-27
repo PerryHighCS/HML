@@ -1062,12 +1062,12 @@
                         switch (val) {
                             case ("Right Hand Card"):
                                 // Use the value of the card the right hand is touching
-                                val = $($('.cards td .cardItem')[state.rHand]).attr('value');
+                                val = $($('.cards .cardItem')[state.rHand]).attr('value');
                                 values.push(parseInt(val));
                                 break;
                             case ("Left Hand Card"):
                                 // Use the value of the card the left hand is touching
-                                val = $($('.cards td .cardItem')[state.lHand]).attr('value');
+                                val = $($('.cards .cardItem')[state.lHand]).attr('value');
                                 values.push(parseInt(val));
                                 break;
                             case ("Right Hand Position"):
@@ -1287,12 +1287,10 @@
                 // Get the card cell and its value for the left hand
                 let lhTD = $($('.cards td')[state.lHand]);
                 let lhItem = lhTD.find('.cardItem');
-                //let lhVal = lhTD.attr('value');
                 
                 // Get the card cell and its value for the right hand
                 let rhTD = $($('.cards td')[state.rHand]);
                 let rhItem = rhTD.find('.cardItem');
-                //let rhVal = rhTD.attr('value');
                 
                 // Take the cards out of the cells
                 lhItem.detach();
