@@ -380,10 +380,10 @@
              * so that their target line numbers have a delta added to them to
              * account for, ie inserted or removed lines of code.
              * 
-             * @param {integer} changeLine the line number to start adjustments
+             * @param {Number} changeLine the line number to start adjustments
              *    around
              * 
-             * @param {integer} delta the direction and amount to adjust jump
+             * @param {Number} delta the direction and amount to adjust jump
              *  target line numbers
              */
             function fixJumps(changeLine, delta) {
@@ -538,6 +538,10 @@
         <script>
             /**
              * Deal the cards
+             * 
+             * @param {String|Number} hand the symbols of the cards to deal, in
+             *                        order, or the number of random cards to
+             *                        deal
              */
             function deal(hand) {
                 // Clear off the board
@@ -657,8 +661,8 @@
             /**
              * Move one of the hands to a given position
              * 
-             * @param {integer} hand the hand to move (0 = left, 1 = right)
-             * @param {integer} pos the position for the hand to move to on the 
+             * @param {Number} hand the hand to move (0 = left, 1 = right)
+             * @param {Number} pos the position for the hand to move to on the 
              *      board
              */
             function moveHand(hand, pos) {
@@ -690,8 +694,8 @@
             /**
              * Shift one of the hands to the right or left
              * 
-             * @param {integer} hand the hand to move (0 = left, 1 = right)
-             * @param {integer} dir the direction to move (-1 = left, 1 = right)
+             * @param {Number} hand the hand to move (0 = left, 1 = right)
+             * @param {Number} dir the direction to move (-1 = left, 1 = right)
              */
             function shiftHand(hand, dir) {
                 // Identify the direction to move
