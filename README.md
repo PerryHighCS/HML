@@ -38,4 +38,4 @@ As instructions are added to the program, the URL will update to include a
 code parameter. This means that working programs (and programs in progress)
 can be bookmarked in a web browser for easier demonstration.
 
-Printing the page will only print the instructions.
+Printing the page will only print the HML code.
