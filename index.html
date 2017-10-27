@@ -33,27 +33,39 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#inst" draggable="false">Program It</a></li>
                 <li class="tryIt">
-                    <a class="tryIt" data-toggle="tab" href="#run" draggable="false">Try It
-                        <!-- buttons appear to run the code when Try-it is selected -->
-                        <div class="tabButtons">
-                            &nbsp;
-                            <button class="btn btn-success runbtn" onclick="runIt()">
-                                <span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program
+                    <a class="tabButtons" data-toggle="tab" href="#run" draggable="false">Try It</a>
+                    <!-- buttons appear to run the code when Try-it is selected -->
+                    <div class="tabButtons">
+                        &nbsp;
+                        <button class="btn btn-success runbtn" onclick="runIt()">
+                            <span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program
+                        </button>
+                        <button class="btn btn-danger stopbtn" onclick="stopIt()">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Stop Program
+                        </button>
+                        
+                        <div class="btn-group tabButtons">
+                            <button type="button" class="btn btn-success redealbtn" onclick="if(!$(this).hasClass('disabled')){deal();}">
+                                    Redeal Cards
                             </button>
-                            <button class="btn btn-danger stopbtn" onclick="stopIt()">
-                                <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Stop Program
+                            <button type="button" class="btn btn-success dropdown-toggle redealbtn" data-toggle="dropdown" >
+                                   &#8239;<span class="caret"></span>
                             </button>
-                            &nbsp;
-                            <button class="btn btn-success redealbtn" onclick="if(!$(this).hasClass('disabled')){deal();}">
-                                Redeal Cards
-                            </button>
-                            &nbsp;Run Speed:&nbsp;
-                            <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50"/>
-                            &nbsp;<span class="glyphicon glyphicon-flash"></span>
-                            &nbsp;Steps:&nbsp;<span class="stepCount"></span>
+                            <ul class="dropdown-menu">
+                                <li onclick="deal(5)"><a>5 cards</a></li>
+                                <li onclick="deal(8);"><a>8 cards</a></li>
+                                <li onclick="deal(10);"><a>10 cards</a></li>
+                                <li onclick="deal(12);"><a>12 cards</a></li>
+                                <li onclick="deal(15);"><a>15 cards</a></li>
+                                <li onclick="deal(20);"><a>20 cards</a></li>
+                            </ul>
                         </div>
-                    </a>
-                </li>
+                        Run Speed:&nbsp;
+                        <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50"/>
+                        &nbsp;<span class="glyphicon glyphicon-flash"></span>
+                        &nbsp;Steps:&nbsp;<span class="stepCount"></span>
+                    </div>
+                    </li>
             </ul>
             <div class="tab-content">
                 <!-- the programming tab -->
@@ -108,17 +120,7 @@
                                     <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Position<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                      <li><a href="#">Right Hand Position</a></li>
-                                      <li><a href="#">Left Hand Position</a></li>
-                                      <li class="divider"></li>
-                                      <li><a href="#">0</a></li>
-                                      <li><a href="#">1</a></li>
-                                      <li><a href="#">2</a></li>
-                                      <li><a href="#">3</a></li>
-                                      <li><a href="#">4</a></li>
-                                      <li><a href="#">5</a></li>
-                                      <li><a href="#">6</a></li>
-                                      <li><a href="#">7</a></li>
+                                        <!-- Positions filled dynamically -->
                                     </ul>
                                 </div>
                             </div>
@@ -172,26 +174,11 @@
                                         </ul>
                                     </div>
                                     &nbsp;
-                                    <div class="fillin value dropdown">
+                                    <div class="fillin value fulllist dropdown">
                                         <a class="dropdown-toggle dropdown-text" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Value<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Right Hand Card</a></li>
-                                            <li><a href="#">Left Hand Card</a></li>
-                                            <li><a href="#">Right Hand Position</a></li>
-                                            <li><a href="#">Left Hand Position</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">0</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">6</a></li>
-                                            <li><a href="#">7</a></li>
-                                            <li><a href="#">8</a></li>
-                                            <li><a href="#">9</a></li>
-                                            <li><a href="#">10</a></li>
+                                            <!-- Menu filled dynamically -->
                                         </ul>
                                     </div>
                                     &nbsp;
@@ -249,10 +236,18 @@
             var instRow = "<tr><td class='linenumcell'>" + 
                             "</td><td  class='instructioncell' " + 
                             "ondrop='drop(event)' ondragover='allowDrop(event)'>" + 
-                            "</td></tr>";    
+                            "</td></tr>";
+            
+            // The html for the drop-down caret
             var caret = '<span class="caret"></span>';
+                        
+            // The url symbols for 21 card values
+            var cardValString = 'xa234567890jqkbcdefghi';
             
             window.onload = function() {
+                // Hide the stop button, prepare to run code
+                stopIt();
+                
                 let params = new URLSearchParams(window.location.search);
 
                 // unlock the swap instruction if asked nicely
@@ -267,8 +262,17 @@
                     buildProgram(params.get('code'));
                 }
                 
+                if (params.has('cards')) {
+                    deal(params.get('cards'));
+                }
+                else {
+                    deal();
+                }
+                
+                // Prepare the code display
                 compactLines();
                 setLineNumbers();
+                fillPositionDropdowns();
                 addDropdownHandlers(); 
             };
             
@@ -366,6 +370,7 @@
                 // Update the program display
                 compactLines();
                 setLineNumbers();
+                fillPositionDropdowns();
                 addDropdownHandlers(); 
                 updateURL();
             }
@@ -469,6 +474,50 @@
             }
             
             /**
+             * Fill the value and position dropdowns
+             */
+            function fillPositionDropdowns() {
+                let movePosHTML = "<li><a href='#'>Right Hand Position</a></li>\n\
+                                   <li><a href='#'>Left Hand Position</a></li>\n\
+                                   <li><a href='#'>Min Position</a></li>\n\
+                                   <li><a href='#'>Max Position</a></li>\n\
+                                   <li class='divider'></li>";
+        
+                let itemStart = "<li><a href='#'>";
+                let itemEnd = "</a></li>";
+                
+                let jumpValHTML = "<li><a href='#'>Right Hand Card</a></li>\n\
+                                   <li><a href='#'>Left Hand Card</a></li>\n\
+                                   <li><a href='#'>Right Hand Position</a></li>\n\
+                                   <li><a href='#'>Left Hand Position</a></li>\n\
+                                   <li><a href='#'>Min Position</a></li>\n\
+                                   <li><a href='#'>Max Position</a></li>\n\
+                                   <li class='divider'></li>";
+                
+                // Build move position menu - include all possible positions
+                for (let i = 0; i < runState.numCards; i++) {
+                    let movePosValItem = itemStart + i + itemEnd;
+                    movePosHTML += movePosValItem;                    
+                }
+                
+                let movePosMenu = $(movePosHTML);
+                let moveMenus = $('.fillin.pos ul.dropdown-menu');
+                moveMenus.empty();
+                moveMenus.append(movePosMenu);
+                
+                // Fill jump-if positions/values
+                for (let i = 0; i <= runState.maxCard; i++) {
+                    let jumpItem = itemStart + i + itemEnd;
+                    jumpValHTML += jumpItem;
+                }
+                
+                let jumpValMenu = $(jumpValHTML);
+                let jumpMenus = $('.fillin.value.fulllist ul.dropdown-menu');
+                jumpMenus.empty();
+                jumpMenus.append(jumpValMenu);
+            }
+            
+            /**
              * Delete all instructions in the program code
              */
             function deleteCode() {
@@ -480,7 +529,7 @@
                     compactLines();
                     
                     // Renumber the blank line
-                    setLineNumbers();
+                    setLineNumbers();                    
                 }
             }
         </script>     
@@ -490,7 +539,7 @@
             /**
              * Deal the cards
              */
-            function deal() {
+            function deal(hand) {
                 // Clear off the board
                 $("#cardboard").empty();
                 
@@ -504,37 +553,105 @@
                 $("#cardboard").append(cardRow);                
                 $("#cardboard").append(handRow);
                 
-                // Create an unshuffled deck of 9 cards
-                let deck = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-                
-                // shuffle the deck
-                for (let i = 0; i < deck.length; i++) {
-                    let newPos = Math.floor(Math.random() * deck.length);
-                    
-                    let card = deck[i];
-                    deck[i] = deck[newPos];
-                    deck[newPos] = card;
-                }
+                let deck = buildDeck(hand);                
                 
                 // Pick a random suit
-                let suit = "hdcs".charAt(Math.floor(Math.random() * 4));
-                runState.suit = suit;
+                runState.suit = "hdcs".charAt(Math.floor(Math.random() * 4));
+                runState.numCards = deck.length;
+                runState.maxCard = 0;
                 
-                // Loop through the first 8 cards in the deck
-                for (let i = 0; i < deck.length - 1; i++) {
-                    // Add the current card to the board
-                    cardRow.append("<td value='" + deck[i] + 
-                            "'><img src='cards/card-" + suit + deck[i] +
-                            ".png' class='card'></td>");
+                // Loop through the cards in the deck
+                for (let i = 0; i < deck.length; i++) {
+                    // Get the value and the symbol of the card
+                    let value = deck[i]; 
+                    let card = cardValString.charAt(deck[i]);
+                    
+                    if (value > runState.maxCard) {
+                        runState.maxCard = value;
+                    }
+                    
+                    if (deck.length < 13) {
+                        let cell = $("<td value='" + value +
+                                "'><img src='cards/card-" + runState.suit + card +
+                                ".png' class='card'></td>");
+                        // Add the card to the board
+                        cardRow.append(cell);
+                    }
+                    else {
+                        let cell = $("<td value='" + value + 
+                                "'><span class='cardNum'>" + value +
+                                "</span></td>");
+                        
+                        // Add the card to the board
+                        cardRow.append(cell);
+                    }
                     
                     // Add the index and hand displays
-                    indexRow.append("<th class='cardIndex'>" + i + "</th>");
+                    let index = $("<th class='cardIndex'>" + i + "</th>");
+                    index.attr('width', (100/(deck.length)) + "%");
+                    indexRow.append(index);
                     handRow.append("<th class='handCell'></th>");
                 }             
                 
                 // Move the hands back to their starting locations
                 moveHand(0, 0);
                 moveHand(1, 1);
+                
+                // Add the cards to the window URL
+                setURLCards(deck);
+                
+                // Make sure that the position values are all present
+                fillPositionDropdowns();
+                addDropdownHandlers(); 
+            }
+            
+            /**
+             * Build a deck from a given hand (string of chars representing card
+             * values), or a random deck
+             * 
+             * @param {String} hand
+             * @returns {Array|buildDeck.deck}
+             */
+            function buildDeck(hand) {
+                let deck = [];
+                
+                if (hand === undefined || typeof (hand) === 'number') {
+                    console.log(hand);
+                    
+                    hand = hand || runState.numCards;
+                    let offset = 1;
+                    
+                    if (hand < 9) {
+                        offset = 2;
+                    }
+                    
+                    // set the deck to (hand + 1) unshuffled cards
+                    for (let i = 0; i < hand + 1; i++) {
+                        deck.push(i + offset);
+                    }
+
+                    // shuffle the deck
+                    for (let i = 0; i < deck.length; i++) {
+                        let newPos = Math.floor(Math.random() * deck.length);
+
+                        let card = deck[i];
+                        deck[i] = deck[newPos];
+                        deck[newPos] = card;                        
+                    }
+                    
+                    // remove the last card from the deck
+                    deck.pop();
+                }
+                else {
+                    hand = hand.toLowerCase();
+                    for (let i = 0; i < hand.length; i++) {
+                        let card = cardValString.indexOf(hand.charAt(i));
+                        
+                        deck.push(card);
+                    }
+                }
+                
+                return deck;
             }
             
             /**
@@ -547,7 +664,7 @@
             function moveHand(hand, pos) {
                 // Constrain the hand to the board
                 pos = Math.max(0, pos);
-                pos = Math.min(7, pos);
+                pos = Math.min(runState.numCards - 1, pos);
                 
                 // Identify the hand to move and record its new location
                 if (hand === 0) {
@@ -594,7 +711,7 @@
                     
                     // Determine where to move it, constrained to the board
                     pos = runState.lHand + dir;                    
-                    if (pos >= 0 && pos < 8) {
+                    if (pos >= 0 && pos < runState.numCards) {
                         runState.lHand = pos;
                     }
                     else {
@@ -607,7 +724,7 @@
                     
                     // Determine where to move it, constrained to the board
                     pos = runState.rHand + dir;                    
-                    if (pos >= 0 && pos < 8) {
+                    if (pos >= 0 && pos < runState.numCards) {
                         runState.rHand = pos;
                     }
                     else {
@@ -634,6 +751,7 @@
                 currentLine: -1,
                 nextLine: -1,
                 numSteps: 0,
+                numCards: 8,
                 runTimer: null,
                 rHand: 1,
                 lHand: 0,
@@ -955,6 +1073,14 @@
                                 // Use the value of the position of the left hand
                                 values.push(state.lHand);
                                 break;
+                            case ("Min Position"):
+                                // Use the minimum position
+                                values.push(0);
+                                break;                                
+                            case ("Max Position"):
+                                // Use the minimum position
+                                values.push(state.numCards - 1);
+                                break;
                             default:
                                 // Use a literal value
                                 val = parseInt(val);
@@ -1123,6 +1249,12 @@
                 else if (pos === "Left Hand Position") {
                     return state.lHand;
                 }
+                else if (pos === "Min Position") {
+                    return 0;
+                }
+                else if (pos === "Max Position") {
+                    return state.numCards - 1;
+                }
                 else if (!isNaN(posNum)) {
                     return posNum;
                 }
@@ -1163,23 +1295,22 @@
                 lhTD.attr('value', rhVal);
                 rhTD.attr('value', lhVal);
                 
-                // Swap the card images
-                lhTD.append("<img src='cards/card-" + state.suit + rhVal +
-                            ".png' class='card'>");
-                rhTD.append("<img src='cards/card-" + state.suit + lhVal +
-                            ".png' class='card'>");
-                    
+                if (state.numCards < 13) {
+                    // Swap the card images
+                    lhTD.append("<img src='cards/card-" + state.suit + cardValString.charAt(rhVal) +
+                                ".png' class='card'>");
+                    rhTD.append("<img src='cards/card-" + state.suit + cardValString.charAt(lhVal) +
+                                ".png' class='card'>");
+                }
+                else {
+                    lhTD.append("<span class='cardNum'>" + rhVal + "</span>");
+                    rhTD.append("<span class='cardNum'>" + lhVal + "</span>");
+                }
                 state.nextLine++;
                 return true;
                     
             }
-            
-            // Hide the stop button, prepare to run code
-            stopIt();
-            
-            // Deal an initial hand
-            deal();
-        </script>
+            </script>
         
         <!-- Clipboard interaction -->
         <script>
@@ -1236,6 +1367,28 @@
                 // Add the code to the url
                 var url = new URL(window.location);
                 url.searchParams.set('code', code);
+                
+                // Set the window url
+                window.history.replaceState(null, document.title, url);
+            }
+            
+            /**
+             * Set the window url to include the current card deck
+             * 
+             * @param {Array|buildDeck.deck} deck the deck of cards to add to
+             *         the url
+             */
+            function setURLCards(deck) {
+                let cards = '';
+                
+                // Build up a string of card symbols from the deck
+                for (let i = 0; i < deck.length; i++) {
+                    cards += cardValString.charAt(deck[i]);
+                }
+                
+                // Add the code to the url
+                var url = new URL(window.location);
+                url.searchParams.set('cards', cards);
                 
                 // Set the window url
                 window.history.replaceState(null, document.title, url);
@@ -1330,7 +1483,13 @@
                 }
                 else if (pos === 'Left Hand Position') {
                     return 'l';
-                }                    
+                }  
+                else if (pos === 'Min Position') {
+                    return 'i';
+                }
+                else if (pos === 'Max Position') {
+                    return 'a';
+                }
                 else {
                     // Use a literal value
                     pos = parseInt(pos);
@@ -1377,6 +1536,10 @@
                         return 'R';
                     case ("Left Hand Position"):
                         return 'L';
+                    case ("Min Position"):
+                        return 'i';
+                    case ("Max Position"):
+                        return 'a';
                     default:
                         // Use a literal value
                         val = parseInt(val);
@@ -1422,9 +1585,7 @@
              * 
              * @param {String} code the compressed code to turn into instructions
              */
-            function buildProgram (code) {
-                console.log("Program code: " + code);
-                
+            function buildProgram (code) {                
                 while (code.length > 0) {
                     code = parseInstruction(code);
                 }
@@ -1569,6 +1730,8 @@
                     case 'R':
                     case 'l':
                     case 'L':
+                    case 'i':
+                    case 'a':
                         // A preset value code
                         return c;
                         
@@ -1693,7 +1856,11 @@
                     case 'l':
                         return "Left Hand Card";
                     case 'L':
-                        return "Left Hand Position";                        
+                        return "Left Hand Position"; 
+                    case 'i':
+                        return "Min Position";
+                    case 'a':
+                        return "Max Position";   
                     default:
                         return val;
                 }
@@ -1790,6 +1957,8 @@
                 switch (c) {
                     case 'r':
                     case 'l':
+                    case 'i':
+                    case 'a':
                     case 'x':
                         // A preset value code
                         return c;
@@ -1838,6 +2007,10 @@
                         return 'Right Hand Position';
                     case 'l':
                         return 'Left Hand Position';
+                    case 'i':
+                        return 'Min Position';
+                    case 'a':
+                        return 'Max Position';
                     default:
                         return pos;
                 }

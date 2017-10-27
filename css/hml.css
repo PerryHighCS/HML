@@ -167,9 +167,7 @@ li.active .tabButtons {
 
 /* Keep the hands in the center of their cells */
 .handCell {
-    text-align: center;
-    width: 12.5%;
-    max-width: 12.5%;
+    text-align: center;    
 }
 
 /* Make the hands BIG and make them touch the cards */
