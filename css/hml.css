@@ -176,10 +176,10 @@ li.active .tabButtons {
     margin-top: -4px;
 }
 
+/* Give numbers room when they are displayed rather than cards */
 .cardnum {
     display: block;
-    height: 1.5em;
-    
+    height: 1.5em;    
 }
 
 /* Flip the lefthand to make it an L */
