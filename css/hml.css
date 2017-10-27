@@ -48,6 +48,12 @@ li.active .tabButtons {
     width: 1px;
     white-space: nowrap;
     text-align: center;
+
+}
+
+#program tbody .linenumcell {
+    vertical-align: middle !important;
+    font-size: 1.5em;
 }
 
 /* position the tool palette */
@@ -92,17 +98,17 @@ li.active .tabButtons {
 
 /* color the fillin blocks */
 .fillin.hand {
-    background-color: #4da6ff;
+    background-color: #92bbfc  !important;
 }
 
 .fillin.dir {
-    background-color: #66ff33;
+    background-color: #92fc6f !important;
 }
 
 .fillin.pos,
 .fillin.value,
 .fillin.linenum {
-    background-color: #FEDC44;    
+    background-color: #fcdf5f !important;    
 }
 
 .condition {
@@ -187,12 +193,12 @@ li.active .tabButtons {
 
 /* Highlight the currently executing line of code */
 tr.currentLine {
-    background: #66ff33 !important;
+    background: #92fc6f !important;
 }
 
 /* Highlight the last executed line of code */
 tr.lastLine {
-    background: #4da6ff !important;
+    background: #92bbfc !important;
 }
 
 /* Make the copy button pretty */
@@ -252,5 +258,23 @@ tr.lastLine {
     
     .copybutton {
         display: none;
+    }
+    
+    #program tbody tr:last-child {
+        display: none;
+    }
+
+    #program thead {
+        display: none;
+    }
+    
+    #program {
+        border: 0;
+        border-bottom: 1px solid black;
+    }
+    
+    #program tr>td {
+        border-top-color: black;
+        border-bottom-color: black;
     }
 }
