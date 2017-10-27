@@ -85,6 +85,8 @@ li.active .tabButtons {
     border-radius: .5em;
     vertical-align: middle;
     padding: 2px;
+    padding-left: 8px;
+    padding-right: 5px;
 }
 
 /* remove the underline from fillins */
@@ -111,6 +113,10 @@ li.active .tabButtons {
     background-color: #fcdf5f !important;    
 }
 
+.caret {
+    margin-left: 6px !important;
+    margin-right: 3px !important;
+}
 .condition {
     display: inline-block;
     border: 1px solid black;
@@ -276,5 +282,13 @@ tr.lastLine {
     #program tr>td {
         border-top-color: black;
         border-bottom-color: black;
+    }
+    
+    .caret {
+        display: none !important;
+    }  
+    
+    .fillin {
+        padding-right: 9px;
     }
 }
