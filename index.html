@@ -575,15 +575,16 @@
                     }
                     
                     if (deck.length < 13) {
-                        let cell = $("<td value='" + value +
-                                "'><img src='cards/card-" + runState.suit + card +
-                                ".png' class='card'></td>");
+                        let cell = $("<td><img src='cards/card-" + 
+                                runState.suit + card +
+                                ".png' class='card cardItem' value='" + value +
+                                "'></td>");
                         // Add the card to the board
                         cardRow.append(cell);
                     }
                     else {
-                        let cell = $("<td value='" + value + 
-                                "'><span class='cardNum'>" + value +
+                        let cell = $("<td><span class='cardNum cardItem'" +
+                                " value='" + value + "'>" + value +
                                 "</span></td>");
                         
                         // Add the card to the board
@@ -972,7 +973,7 @@
                 let shouldJump = false;
 
                 // Determine what values to compare
-                let values = getValues(inst, state);
+                let values = getCardOrPosValues(inst, state);
                 if (values === null) {
                     return false;
                 }
@@ -1047,7 +1048,7 @@
              * @param {runState} state the current execution state
              * @returns {Number[]} the values in the conditional, null if invalid
              */
-            function getValues(inst, state) {
+            function getCardOrPosValues(inst, state) {
                 let values = [];
                 let invalid = false;
                
@@ -1061,12 +1062,12 @@
                         switch (val) {
                             case ("Right Hand Card"):
                                 // Use the value of the card the right hand is touching
-                                val = $($('.cards td')[state.rHand]).attr('value');
+                                val = $($('.cards td .cardItem')[state.rHand]).attr('value');
                                 values.push(parseInt(val));
                                 break;
                             case ("Left Hand Card"):
                                 // Use the value of the card the left hand is touching
-                                val = $($('.cards td')[state.lHand]).attr('value');
+                                val = $($('.cards td .cardItem')[state.lHand]).attr('value');
                                 values.push(parseInt(val));
                                 break;
                             case ("Right Hand Position"):
@@ -1285,31 +1286,22 @@
                 
                 // Get the card cell and its value for the left hand
                 let lhTD = $($('.cards td')[state.lHand]);
-                let lhVal = lhTD.attr('value');
+                let lhItem = lhTD.find('.cardItem');
+                //let lhVal = lhTD.attr('value');
                 
                 // Get the card cell and its value for the right hand
                 let rhTD = $($('.cards td')[state.rHand]);
-                let rhVal = rhTD.attr('value');
+                let rhItem = rhTD.find('.cardItem');
+                //let rhVal = rhTD.attr('value');
                 
-                // Empty the cells
-                lhTD.empty();
-                rhTD.empty();
+                // Take the cards out of the cells
+                lhItem.detach();
+                rhItem.detach();
+                                
+                // Put the cards in their new home
+                lhTD.append(rhItem);
+                rhTD.append(lhItem);
                 
-                // Swap the card values
-                lhTD.attr('value', rhVal);
-                rhTD.attr('value', lhVal);
-                
-                if (state.numCards < 13) {
-                    // Swap the card images
-                    lhTD.append("<img src='cards/card-" + state.suit + cardValString.charAt(rhVal) +
-                                ".png' class='card'>");
-                    rhTD.append("<img src='cards/card-" + state.suit + cardValString.charAt(lhVal) +
-                                ".png' class='card'>");
-                }
-                else {
-                    lhTD.append("<span class='cardNum'>" + rhVal + "</span>");
-                    rhTD.append("<span class='cardNum'>" + lhVal + "</span>");
-                }
                 state.nextLine++;
                 return true;
                     
