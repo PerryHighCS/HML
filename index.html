@@ -47,9 +47,10 @@
                             <button class="btn btn-success redealbtn" onclick="if(!$(this).hasClass('disabled')){deal();}">
                                 Redeal Cards
                             </button>
-                            Run Speed:&nbsp;
+                            &nbsp;Run Speed:&nbsp;
                             <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50"/>
                             &nbsp;<span class="glyphicon glyphicon-flash"></span>
+                            &nbsp;Steps:&nbsp;<span class="stepCount"></span>
                         </div>
                     </a>
                 </li>
@@ -641,6 +642,7 @@
             var runState = {
                 currentLine: -1,
                 nextLine: -1,
+                numSteps: 0,
                 runTimer: null,
                 rHand: 1,
                 lHand: 0,
@@ -656,6 +658,11 @@
                     
                     // Set the starting line
                     runState.nextLine = 0;
+                    
+                    // Reinitialize the step count
+                    numSteps = 0;
+                    $('.stepCount').text(0);
+                    
                     
                     // reinitialize hands
                     moveHand(0, 0);
@@ -680,6 +687,9 @@
                     
                     // If the next line number is a legal line number
                     if (runState.nextLine >= 0 && runState.nextLine < lines.length) {
+                        numSteps++;
+                        $('.stepCount').text(numSteps);
+                        
                         // Remember it as the new current line
                         runState.currentLine = runState.nextLine;
                         
