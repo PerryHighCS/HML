@@ -1291,11 +1291,7 @@
                 // Get the card cell and its value for the right hand
                 let rhTD = $($('.cards td')[state.rHand]);
                 let rhItem = rhTD.find('.cardItem');
-                
-                // Take the cards out of the cells
-                lhItem.detach();
-                rhItem.detach();
-                                
+                                                
                 // Put the cards in their new home
                 lhTD.append(rhItem);
                 rhTD.append(lhItem);
