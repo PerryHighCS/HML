@@ -75,11 +75,11 @@
                     </div>
                     
                     <!-- All of the HML commands available -->
-                    <div class="commands">
+                    <div class="commands" 
+                         ondrop="trashInstruction(event)" 
+                         ondragover="allowDropInstruction(event)" >
                         <b>Command Toolbox:</b>
-                        <img src="trash.png" id="trashcan" draggable="false" 
-                             ondrop="dropInstruction(event)" 
-                             ondragover="allowDropInstruction(event)" 
+                        <img src="trash.png" id="trashcan" draggable="false"
                              ondblclick="deleteCode()" alt="trash can">
                         <div class="palette">
                             
@@ -322,7 +322,8 @@
             }
 
             /**
-             * Handle an instruction being dropped onto another element
+             * Handle an instruction being dropped into the program
+             * 
              * @param {DropEvent} ev
              */
             function dropInstruction(ev) {
@@ -338,7 +339,7 @@
                 // and the place it was dropped
                 let target = $(ev.target);
                 
-                if (!(target.is('#trashcan') || target.is('td'))) {
+                if (!(target.is('td'))) {
                     // If the drop location was not a table cell
 
                     // Find the parent table cell
@@ -351,29 +352,58 @@
                     $($("#program tbody tr")[data.line - 1]).find(".instructioncell").empty();
                 }
                 
-                // If the target isn't the trashcan
-                if (!target.is('#trashcan')) {
-                    // If the target is currently empty
-                    if (target.has('.instruction').length === 0 ){
-                        // add the instruction to the target
-                        target.append(data.item);
-                    }
-                    else {
-                        // If there was an instruction where the new one was dropped
-                        // Insert a new row
-                        
-                        let curRow = target.parents("tr");
-                        
-                        curRow.before(instRow);
-                        
-                        let newRow = curRow.parents("tbody").find("tr").index(curRow) - 1;
-                                                
-                        $(curRow.parent("tbody").find("tr")[newRow]).find(".instructioncell").append(data.item);
-                        
-                        fixJumps(newRow + 1, 1);
-                    }                                         
+                // If the target is currently empty
+                if (target.has('.instruction').length === 0 ){
+                    // add the instruction to the target
+                    target.append(data.item);
+                }
+                else {
+                    // If there was an instruction where the new one was dropped
+                    // Insert a new row
+
+                    let curRow = target.parents("tr");
+
+                    curRow.before(instRow);
+
+                    let newRow = curRow.parents("tbody").find("tr").index(curRow) - 1;
+
+                    $(curRow.parent("tbody").find("tr")[newRow]).find(".instructioncell").append(data.item);
+
+                    fixJumps(newRow + 1, 1);
+                }  
+                
+                // Update the program display
+                compactLines();
+                setLineNumbers();
+                fillPositionDropdowns();
+                addDropdownHandlers(); 
+                updateURL();
+            }
+            
+            /**
+             * Handle an instruction being dropped outside the program editor
+             * 
+             * @param {DropEvent} ev
+             */
+            function trashInstruction(ev) {
+                ev.preventDefault();
+                
+                // Get the item being dropped
+                let data = JSON.parse(ev.dataTransfer.getData("text"));
+                
+                if (data.thing !== "instruction") {
+                    return;
                 }
                 
+                // and the place it was dropped
+                let target = $(ev.target);
+                                
+                // If dragging from the program
+                if (data.src === "program") {
+                    // delete the original instruction
+                    $($("#program tbody tr")[data.line - 1]).find(".instructioncell").empty();
+                }
+                                
                 // Update the program display
                 compactLines();
                 setLineNumbers();
