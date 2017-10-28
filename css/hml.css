@@ -1,11 +1,22 @@
+body {
+    min-width: 800px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
 /* position the toolbox at the top of the screen */
 .toolbox {
     position: fixed;
     top: 0px;
     left: 0px;
     right: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-right: auto;
+    margin-left: 10px;
+    min-width: 790px;
 }
 
 /* Shrink the try-it tab's padding to accomodate buttons when it is active '*/
@@ -32,8 +43,10 @@ li.active .tabButtons {
     left: 0px;
     right: 0px;
     
-    margin-right: 20px;
-    margin-left: 20px;
+    max-width: 850px;
+    min-width: 793px;
+    margin-right: auto;
+    margin-left: auto;
     
     overflow-y: auto;
 }
@@ -59,7 +72,6 @@ li.active .tabButtons {
 /* position the tool palette */
 .palette {
     display: block;
-    margin-left: 20px;
 }
 
 /* make the instruction blocks into blocks */
@@ -129,7 +141,7 @@ li.active .tabButtons {
 #trashcan {
     height: 64px;
     float: right;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 /* The program editor should fill the rest of the screen */
