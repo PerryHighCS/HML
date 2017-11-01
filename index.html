@@ -61,7 +61,7 @@
                             </ul>
                         </div>
                         Run Speed:&nbsp;
-                        <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50"/>
+                        <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50" onchange="setURLSpeed(this.value)"/>
                         &nbsp;<span class="glyphicon glyphicon-flash"></span>
                         &nbsp;Steps:&nbsp;<span class="stepCount"></span>
                     </div>
@@ -267,6 +267,10 @@
                 if (params.has('cards')) {
                     deal(params.get('cards'));
                 }
+                if (params.has('speed')) {
+                    document.getElementById("runSlider").value = params.get('speed');
+                }
+                
                 else {
                     deal();
                 }
@@ -377,7 +381,7 @@
                 setLineNumbers();
                 fillPositionDropdowns();
                 addDropdownHandlers(); 
-                updateURL();
+                setURLCode();
             }
             
             /**
@@ -409,7 +413,7 @@
                 setLineNumbers();
                 fillPositionDropdowns();
                 addDropdownHandlers(); 
-                updateURL();
+                setURLCode();
             }
             
             /** 
@@ -573,7 +577,7 @@
                             // and fill it with the selected item
                             .html($(this).text() + caret);
                     // then update the URL
-                    updateURL();
+                    setURLCode();
                 });                
             }
             
@@ -1479,7 +1483,7 @@
             /**
              * Update the page url to include the current program code
              */
-            function updateURL() {
+            function setURLCode() {
                 let code="";
                 
                 // Convert all of the program instructions into code
@@ -1514,6 +1518,21 @@
                 // Add the code to the url
                 var url = new URL(window.location);
                 url.searchParams.set('cards', cards);
+                
+                // Set the window url
+                window.history.replaceState(null, document.title, url);
+            }
+            
+            /**
+             * Set the window url to include the current speed. Hi number means low speed.
+             * 
+             * @param {int|speed} current step speed
+             */
+            function setURLSpeed(runSpeed) {
+                
+                // Add the code to the url
+                var url = new URL(window.location);
+                url.searchParams.set('speed', runSpeed);
                 
                 // Set the window url
                 window.history.replaceState(null, document.title, url);
