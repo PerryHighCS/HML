@@ -1675,13 +1675,13 @@
             function valCode(val) {
                 switch (val) {
                     case ("Right Hand Card"):
-                        return 'r';
-                    case ("Left Hand Card"):
-                        return 'l';
-                    case ("Right Hand Position"):
                         return 'R';
-                    case ("Left Hand Position"):
+                    case ("Left Hand Card"):
                         return 'L';
+                    case ("Right Hand Position"):
+                        return 'r';
+                    case ("Left Hand Position"):
+                        return 'l';
                     case ("Min Position"):
                         return 'i';
                     case ("Max Position"):
@@ -1872,10 +1872,10 @@
 
                 switch (c) {
                     case 'x':
-                    case 'r':
                     case 'R':
-                    case 'l':
+                    case 'r':
                     case 'L':
+                    case 'l':
                     case 'i':
                     case 'a':
                         // A preset value code
@@ -1995,13 +1995,13 @@
              */
             function expandValue(val) {
                 switch (val) {
-                    case 'r':
-                        return "Right Hand Card";
                     case 'R':
+                        return "Right Hand Card";
+                    case 'r':
                         return "Right Hand Position";
-                    case 'l':
-                        return "Left Hand Card";
                     case 'L':
+                        return "Left Hand Card";
+                    case 'l':
                         return "Left Hand Position"; 
                     case 'i':
                         return "Min Position";
