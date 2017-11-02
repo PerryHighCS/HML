@@ -266,14 +266,14 @@
                 
                 if (params.has('cards')) {
                     deal(params.get('cards'));
+                } 
+                else {
+                    deal();
                 }
                 if (params.has('speed')) {
                     document.getElementById("runSlider").value = params.get('speed');
                 }
-                
-                else {
-                    deal();
-                }
+               
                 
                 // Prepare the code display
                 compactLines();
@@ -1524,7 +1524,7 @@
             }
             
             /**
-             * Set the window url to include the current speed. Hi number means low speed.
+             * Set the window url to include the current run speed. Large number indicates slow speed (0-100)
              * 
              * @param {int|speed} current step speed
              */
