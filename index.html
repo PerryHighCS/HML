@@ -1529,13 +1529,15 @@
              * @param {int|speed} current step speed
              */
             function setURLSpeed(runSpeed) {
-                
-                // Add the code to the url
-                var url = new URL(window.location);
-                url.searchParams.set('speed', runSpeed);
-                
-                // Set the window url
-                window.history.replaceState(null, document.title, url);
+                let params = new URLSearchParams(window.location.search);
+                if (params.has('speed')) {
+                    // Add the code to the url
+                    var url = new URL(window.location);
+                    url.searchParams.set('speed', runSpeed);
+
+                    // Set the window url
+                    window.history.replaceState(null, document.title, url);
+                }
             }
             
             /**
