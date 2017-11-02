@@ -962,7 +962,7 @@
                             
                             // Get the slider value
                             let slider=$('#runSlider');
-                            let time=slider.val();
+                            let time=100-slider.val();
                             
                             // Get the scaling ranges
                             let minTime = Math.log(10);
@@ -1524,7 +1524,7 @@
             }
             
             /**
-             * Set the window url to include the current run speed. Large number indicates slow speed (0-100)
+             * Set the window url to include the current run speed.
              * 
              * @param {int|speed} current step speed
              */

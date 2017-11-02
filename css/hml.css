@@ -238,7 +238,6 @@ tr.lastLine {
     display: inline-block;
     width: 100px;
     vertical-align: middle;
-    direction: rtl;
 }
 /* Fork on github corner mark */
 .github-corner:hover .octo-arm {
