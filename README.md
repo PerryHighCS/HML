@@ -15,8 +15,13 @@ that can be rearranged on a template.
 This tool is designed to be served statically from a web server, it is being
 served via GitHub pages at https://perryma.tk/HML
 
-Simply cloning this repository to another GitHub pages site will give you
-your very own copy.
+You can make your own copy by clicking on the Fork button above. This will make 
+a copy of the HML in your GitHub account. If you then click on the Settings
+Icon on your new copy and scroll down to the GitHub Pages section, you will
+have the option to have GitHub serve your copy. Select Source and change it
+to Master. Then click the Save button that appears. GitHub will show that
+your page is ready to publish at a url. In a bit, that will change to "Your page is 
+published at..." that url will be your copy of the HML.
 
 ## Usage
 
