@@ -32,11 +32,60 @@ var runState = {
         // Initialize the timer
         runState.runTimer = setTimeout(runState.doNextLine, 5);
     },
+    
+    /**
+     * Execute the next line of HML code
+     */
+    step: function() {
+        // If execution is paused
+        if (runState.nextLine >= 0) {
+            // Run the next line
+            runState.doNextLine(true);
+        }
+        else {
+            // Otherwise start execution at the beginning.
+            
+            // reset any current line indication
+            $('.currentLine').removeClass('currentLine');
+            $('.lastLine').removeClass('lastLine');
+
+            // Set the starting line
+            runState.nextLine = 0;
+
+            // Reinitialize the step count
+            numSteps = 0;
+            $('.stepCount').text(0);
+
+
+            // reinitialize hands
+            moveHand(0, 0);
+            moveHand(1, 1);
+            
+            runState.doNextLine(true);
+        }
+    },
+    
+    /**
+     * Continue executing HML code where the program was stopped
+     */
+    cont: function() {
+        // If execution was paused
+        if (runState.nextLine >= 0) {
+            // Restart the run timer to run the next line
+            runState.runTimer = setTimeout(runState.doNextLine, 5);
+        }
+        else {
+            // Otherwise start from the beginning
+            runState.go();
+        }
+    },
 
     /**
      * Run the next HML instruction
+     * @param {boolean} singleStep should we automatically to continue to the 
+     *                             next line
      */
-    doNextLine: function () {
+    doNextLine: function (singleStep) {
         // Get all lines of code
         let lines = $('#program tbody tr');
 
@@ -63,31 +112,33 @@ var runState = {
 
             // Run the command
             if (doCommand(runState, line.find('.instruction')[0])) {
-                // If the command was successful (and not a stop),
-                // prepare to run the next line
+                if (!singleStep) {
+                    // If the command was successful (and not a stop),
+                    // prepare to run the next line
 
-                // Calculate the time between instructions based on
-                // the value of the Run Speed Slider, scaling the
-                // value logarithmically to a range of 2000ms - 10ms
+                    // Calculate the time between instructions based on
+                    // the value of the Run Speed Slider, scaling the
+                    // value logarithmically to a range of 2000ms - 10ms
 
-                // Get the slider value
-                let slider = $('#runSlider');
-                let time = 100 - slider.val();
+                    // Get the slider value
+                    let slider = $('#runSlider');
+                    let time = 100 - slider.val();
 
-                // Get the scaling ranges
-                let minTime = Math.log(10);
-                let maxTime = Math.log(2000);
-                let minP = slider.attr('min');
-                let maxP = slider.attr('max');
+                    // Get the scaling ranges
+                    let minTime = Math.log(10);
+                    let maxTime = Math.log(2000);
+                    let minP = slider.attr('min');
+                    let maxP = slider.attr('max');
 
-                // Calculate the scale factor
-                let scale = (maxTime - minTime) / (maxP - minP);
+                    // Calculate the scale factor
+                    let scale = (maxTime - minTime) / (maxP - minP);
 
-                // Calculate the time interval
-                time = Math.ceil(Math.exp(minTime + scale * (time - minP)));
+                    // Calculate the time interval
+                    time = Math.ceil(Math.exp(minTime + scale * (time - minP)));
 
-                // Set the time to run the next instruction
-                runState.runTimer = setTimeout(runState.doNextLine, time);
+                    // Set the time to run the next instruction
+                    runState.runTimer = setTimeout(runState.doNextLine, time);                
+                }
             } else {
                 // If the command was not successful, or was a stop,
                 // stop running
@@ -100,6 +151,18 @@ var runState = {
     }
 };
 
+$('#runStepBtn').on("click", null, "run", runStep);
+$('#runItem').hide();
+    
+function runStep(evt) {
+    if (evt.data === "run") {
+        runIt();
+    }
+    else if (evt.data === "step") {
+        stepIt();
+    }
+}
+
 /**
  * Prepare to run, updating the display
  */
@@ -107,12 +170,63 @@ function runIt() {
     // Hide the run button, show the stop button
     $('.runbtn').hide();
     $('.stopbtn').show();
-
+    
+    // Make the run/step button show 'run'
+    $('#runStepTxt').text("Run");    
+    $('#runStepSel').text("Step");
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "run", runStep);
+    $('#runItem').hide();
+    $('#stepItem').show();
+    
     // Disable redealing while running
     $('.redealbtn').addClass('disabled');
 
     // Begin execution
     runState.go();
+}
+
+/**
+ * Prepare to step, updating the display
+ */
+function stepIt() {
+    // Make the run/step button show 'step'
+    $('#runStepTxt').text("Step");    
+    $('#runStepSel').text("Run");
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "step", runStep);
+    $('#runItem').show();
+    $('#stepItem').hide();
+    
+    // Execute a program step
+    runState.step();
+}
+
+/**
+ * Prepare to continue, updating the display
+ */
+function continueIt() {
+    // Hide the run button, show the stop button
+    $('.runbtn').hide();
+    $('.stopbtn').show();
+    
+    // Make the run/step button show 'run'
+    $('#runStepTxt').text("Run");    
+    $('#runStepSel').text("Step");
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "run", runStep);
+    $('#runItem').hide();
+    $('#stepItem').show();
+    
+    // Disable redealing while running
+    $('.redealbtn').addClass('disabled');
+
+
+    // Don't show the line where execution stopped
+    $('.lastLine').removeClass('lastLine');
+    
+    // Continue program execution
+    runState.cont();
 }
 
 /**
@@ -127,7 +241,7 @@ function stopIt() {
     $('.redealbtn').removeClass('disabled');
 
     // There is no longer a next line
-    runState.nextLine = -1;
+    //runState.nextLine = -1;
 
     // Stop any left over execution timer
     clearTimeout(runState.runTimer);

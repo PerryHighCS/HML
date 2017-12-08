@@ -37,9 +37,19 @@
                     <!-- buttons appear to run the code when Try-it is selected -->
                     <div class="tabButtons">
                         &nbsp;
-                        <button class="btn btn-success runbtn" onclick="runIt()">
-                            <span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program
-                        </button>
+                        <div class="btn-group tabButtons">
+                            <button class="btn btn-success runbtn" id="runStepBtn">
+                                <span class="glyphicon glyphicon-play-circle"></span>&nbsp;<span id="runStepTxt">Run</span> Program
+                            </button>
+                            <button class="btn btn-success dropdown-toggle runbtn" data-toggle="dropdown">
+                                &#8239;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li id="runItem" onclick="runIt();"><a>Run</a></li>
+                                <li id="stepItem" onclick="stepIt();"><a>Step</a></li>                                
+                                <li onclick="continueIt();"><a>Continue</a></li>
+                            </ul>
+                        </div>
                         <button class="btn btn-danger stopbtn" onclick="stopIt()">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Stop Program
                         </button>
