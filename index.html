@@ -61,7 +61,7 @@
                             </ul>
                         </div>
                         Run Speed:&nbsp;
-                        <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50"/>
+                        <input type="range" class="slider" id="runSlider" min="0" max="100" step="1" value="50" onchange="setURLSpeed(this.value)"/>
                         &nbsp;<span class="glyphicon glyphicon-flash"></span>
                         &nbsp;Steps:&nbsp;<span class="stepCount"></span>
                     </div>
@@ -266,10 +266,14 @@
                 
                 if (params.has('cards')) {
                     deal(params.get('cards'));
-                }
+                } 
                 else {
                     deal();
                 }
+                if (params.has('speed')) {
+                    document.getElementById("runSlider").value = params.get('speed');
+                }
+               
                 
                 // Prepare the code display
                 compactLines();
@@ -378,7 +382,7 @@
                 setLineNumbers();
                 fillPositionDropdowns();
                 addDropdownHandlers(); 
-                updateURL();
+                setURLCode();
             }
             
             /**
@@ -410,7 +414,7 @@
                 setLineNumbers();
                 fillPositionDropdowns();
                 addDropdownHandlers(); 
-                updateURL();
+                setURLCode();
             }
             
             /** 
@@ -574,7 +578,7 @@
                             // and fill it with the selected item
                             .html($(this).text() + caret);
                     // then update the URL
-                    updateURL();
+                    setURLCode();
                 });                
             }
             
@@ -959,7 +963,7 @@
                             
                             // Get the slider value
                             let slider=$('#runSlider');
-                            let time=slider.val();
+                            let time=100-slider.val();
                             
                             // Get the scaling ranges
                             let minTime = Math.log(10);
@@ -1482,7 +1486,7 @@
             /**
              * Update the page url to include the current program code
              */
-            function updateURL() {
+            function setURLCode() {
                 let code="";
                 
                 // Convert all of the program instructions into code
@@ -1520,6 +1524,23 @@
                 
                 // Set the window url
                 window.history.replaceState(null, document.title, url);
+            }
+            
+            /**
+             * Set the window url to include the current run speed.
+             * 
+             * @param {int|speed} current step speed
+             */
+            function setURLSpeed(runSpeed) {
+                let params = new URLSearchParams(window.location.search);
+                if (params.has('speed')) {
+                    // Add the code to the url
+                    var url = new URL(window.location);
+                    url.searchParams.set('speed', runSpeed);
+
+                    // Set the window url
+                    window.history.replaceState(null, document.title, url);
+                }
             }
             
             /**
@@ -1678,13 +1699,13 @@
             function valCode(val) {
                 switch (val) {
                     case ("Right Hand Card"):
-                        return 'r';
-                    case ("Left Hand Card"):
-                        return 'l';
-                    case ("Right Hand Position"):
                         return 'R';
-                    case ("Left Hand Position"):
+                    case ("Left Hand Card"):
                         return 'L';
+                    case ("Right Hand Position"):
+                        return 'r';
+                    case ("Left Hand Position"):
+                        return 'l';
                     case ("Min Position"):
                         return 'i';
                     case ("Max Position"):
@@ -1875,10 +1896,10 @@
 
                 switch (c) {
                     case 'x':
-                    case 'r':
                     case 'R':
-                    case 'l':
+                    case 'r':
                     case 'L':
+                    case 'l':
                     case 'i':
                     case 'a':
                         // A preset value code
@@ -1998,13 +2019,13 @@
              */
             function expandValue(val) {
                 switch (val) {
-                    case 'r':
-                        return "Right Hand Card";
                     case 'R':
+                        return "Right Hand Card";
+                    case 'r':
                         return "Right Hand Position";
-                    case 'l':
-                        return "Left Hand Card";
                     case 'L':
+                        return "Left Hand Card";
+                    case 'l':
                         return "Left Hand Position"; 
                     case 'i':
                         return "Min Position";
