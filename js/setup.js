@@ -24,17 +24,23 @@ window.onload = function () {
         $('.instruction.swap').hide();
     }
 
+    // Load code from the url
     if (params.has('code')) {
-        buildProgram(params.get('code'));
+        buildProgram(params.get('code'));   
     }
 
+    // Load the dealt cards from the url if provided
     if (params.has('cards') && params.get('cards').length > 0) {
         deal(params.get('cards'));
     } else {
         deal();
     }
+    
+    // Load the execution speed from the url
     if (params.has('speed')) {
-        document.getElementById("runSlider").value = params.get('speed');
+        let speed = params.get('speed') || 50;              // Provide a default speed if blank
+        document.getElementById("runSlider").value = speed; // Set the speed slider to the provided speed
+        setURLSpeed(speed);                                 // Post the speed back to the url
     }
 
     // Prepare the code display

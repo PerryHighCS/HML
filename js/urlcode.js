@@ -26,6 +26,7 @@ function setURLCode() {
 function setURLCards(deck) {
     let params = new URLSearchParams(window.location.search);
     
+    // Only post the deck to the url if a cards param is currently there
     if (params.has('cards')) {
         let cards = '';
         deck = deck || makeDeckArray();
@@ -51,11 +52,15 @@ function setURLCards(deck) {
  */
 function setURLSpeed(runSpeed) {
     let params = new URLSearchParams(window.location.search);
+    
+    // Only post the speed to the url if a speed param is currently there
     if (params.has('speed')) {
+        runSpeed = runSpeed || 50;
+        
         // Add the code to the url
         var url = new URL(window.location);
         url.searchParams.set('speed', runSpeed);
-
+        
         // Set the window url
         window.history.replaceState(null, document.title, url);
     }
