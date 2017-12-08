@@ -24,21 +24,24 @@ function setURLCode() {
  *         the url
  */
 function setURLCards(deck) {
-    let cards = '';
+    let params = new URLSearchParams(window.location.search);
+    
+    if (params.has('cards')) {
+        let cards = '';
+        deck = deck || makeDeckArray();
 
-    deck = deck || makeDeckArray();
+       // Build up a string of card symbols from the deck
+       for (let i = 0; i < deck.length; i++) {
+           cards += cardValString.charAt(deck[i]);
+       }
 
-    // Build up a string of card symbols from the deck
-    for (let i = 0; i < deck.length; i++) {
-        cards += cardValString.charAt(deck[i]);
-    }
+       // Add the code to the url
+       var url = new URL(window.location);
+       url.searchParams.set('cards', cards);
 
-    // Add the code to the url
-    var url = new URL(window.location);
-    url.searchParams.set('cards', cards);
-
-    // Set the window url
-    window.history.replaceState(null, document.title, url);
+       // Set the window url
+       window.history.replaceState(null, document.title, url);
+   }
 }
 
 /**

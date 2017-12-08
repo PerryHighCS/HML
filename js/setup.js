@@ -28,7 +28,7 @@ window.onload = function () {
         buildProgram(params.get('code'));
     }
 
-    if (params.has('cards')) {
+    if (params.has('cards') && params.get('cards').length > 0) {
         deal(params.get('cards'));
     } else {
         deal();
