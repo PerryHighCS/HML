@@ -13,7 +13,7 @@ var cardValString = 'xa234567890jqkbcdefghi';
 
 window.onload = function () {
     // Hide the stop button, prepare to run code
-    stopIt();
+    stopIt(true);
 
     let params = new URLSearchParams(window.location.search);
 

@@ -39,18 +39,20 @@
                         &nbsp;
                         <div class="btn-group tabButtons">
                             <button class="btn btn-success runbtn" id="runStepBtn">
-                                <span class="glyphicon glyphicon-play-circle"></span>&nbsp;<span id="runStepTxt">Run</span> Program
+                                <span id="runTxt"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;Run Program</span> 
+                                <span id="stepTxt" style="display: none;" ><span class="glyphicon glyphicon-download"></span>&nbsp;Step Program</span>
+                                <span id="continueTxt" style="display: none;" ><span class="glyphicon glyphicon-play-circle"></span>&nbsp;Continue</span>
                             </button>
                             <button class="btn btn-success dropdown-toggle runbtn" data-toggle="dropdown">
                                 &#8239;<span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li id="runItem" onclick="runIt();"><a>Run</a></li>
                                 <li id="stepItem" onclick="stepIt();"><a>Step</a></li>                                
-                                <li onclick="continueIt();"><a>Continue</a></li>
+                                <li id="continueItem" onclick="continueIt();"><a>Continue</a></li>                                
+                                <li id="restartItem" onclick="restartIt();" style="display: none;"><a>Restart</a></li>
                             </ul>
                         </div>
-                        <button class="btn btn-danger stopbtn" onclick="stopIt()">
+                        <button class="btn btn-danger stopbtn" onclick="stopIt(false)">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Stop Program
                         </button>
                         

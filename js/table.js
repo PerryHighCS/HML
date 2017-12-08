@@ -65,9 +65,7 @@ function deal(hand) {
         handRow.append("<td class='handCell'></td>");
     }
 
-    // Move the hands back to their starting locations
-    moveHand(0, 0);
-    moveHand(1, 1);
+    restartIt();
 
     // Add the cards to the window URL
     setURLCards(deck);

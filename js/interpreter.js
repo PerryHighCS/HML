@@ -17,17 +17,7 @@ var runState = {
         $('.currentLine').removeClass('currentLine');
         $('.lastLine').removeClass('lastLine');
 
-        // Set the starting line
-        runState.nextLine = 0;
-
-        // Reinitialize the step count
-        numSteps = 0;
-        $('.stepCount').text(0);
-
-
-        // reinitialize hands
-        moveHand(0, 0);
-        moveHand(1, 1);
+        runState.reset();
 
         // Initialize the timer
         runState.runTimer = setTimeout(runState.doNextLine, 5);
@@ -49,17 +39,7 @@ var runState = {
             $('.currentLine').removeClass('currentLine');
             $('.lastLine').removeClass('lastLine');
 
-            // Set the starting line
-            runState.nextLine = 0;
-
-            // Reinitialize the step count
-            numSteps = 0;
-            $('.stepCount').text(0);
-
-
-            // reinitialize hands
-            moveHand(0, 0);
-            moveHand(1, 1);
+            runState.reset();
             
             runState.doNextLine(true);
         }
@@ -142,24 +122,43 @@ var runState = {
             } else {
                 // If the command was not successful, or was a stop,
                 // stop running
-                stopIt();
+                stopIt(true);
             }
         } else {
             // If the next line is not a legal line, stop running
-            stopIt();
+            stopIt(true);
         }
+    },
+    
+    reset: function() {
+        // Set the starting line
+        runState.nextLine = 0;
+
+        // Reinitialize the step count
+        numSteps = 0;
+        $('.stepCount').text(0);
+
+        // reinitialize hands
+        moveHand(0, 0);
+        moveHand(1, 1);
     }
 };
 
 $('#runStepBtn').on("click", null, "run", runStep);
-$('#runItem').hide();
-    
+
+/**
+ * Run/Step/Continue button handler
+ * @param {type} evt contains the command to execute in .data
+ */
 function runStep(evt) {
     if (evt.data === "run") {
         runIt();
     }
     else if (evt.data === "step") {
         stepIt();
+    }
+    else if (evt.data === "continue") {
+        continueIt();
     }
 }
 
@@ -172,12 +171,16 @@ function runIt() {
     $('.stopbtn').show();
     
     // Make the run/step button show 'run'
-    $('#runStepTxt').text("Run");    
-    $('#runStepSel').text("Step");
+    $('#runTxt').show();    
+    $('#stepTxt').hide();  
+    $('#continueTxt').hide(); 
     $('#runStepBtn').off("click", null, runStep);
     $('#runStepBtn').on("click", null, "run", runStep);
-    $('#runItem').hide();
     $('#stepItem').show();
+    
+    // Make the run/step button run the program
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "step", runStep);
     
     // Disable redealing while running
     $('.redealbtn').addClass('disabled');
@@ -191,12 +194,19 @@ function runIt() {
  */
 function stepIt() {
     // Make the run/step button show 'step'
-    $('#runStepTxt').text("Step");    
-    $('#runStepSel').text("Run");
+    $('#runTxt').hide();    
+    $('#stepTxt').show();
+    $('#continueTxt').hide(); 
+    $('#continueItem').show();
+    $('#restartItem').show();
+    $('#stepItem').hide();
+    
+    // Make the run/step button step the program
     $('#runStepBtn').off("click", null, runStep);
     $('#runStepBtn').on("click", null, "step", runStep);
-    $('#runItem').show();
-    $('#stepItem').hide();
+    
+    // Don't show the line where execution stopped
+    $('.lastLine').removeClass('lastLine');
     
     // Execute a program step
     runState.step();
@@ -209,14 +219,17 @@ function continueIt() {
     // Hide the run button, show the stop button
     $('.runbtn').hide();
     $('.stopbtn').show();
-    
-    // Make the run/step button show 'run'
-    $('#runStepTxt').text("Run");    
-    $('#runStepSel').text("Step");
-    $('#runStepBtn').off("click", null, runStep);
-    $('#runStepBtn').on("click", null, "run", runStep);
-    $('#runItem').hide();
+        
+    // Make the run/step button show 'continue'
+    $('#runTxt').hide();    
+    $('#stepTxt').hide();
+    $('#continueTxt').show(); 
     $('#stepItem').show();
+    $('#restartItem').show();
+    
+    // Make the run/step button run the program
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "continue", runStep);
     
     // Disable redealing while running
     $('.redealbtn').addClass('disabled');
@@ -231,17 +244,44 @@ function continueIt() {
 
 /**
  * Stop execution, updating the display
+ * @param {boolean} done execution has finished
  */
-function stopIt() {
+function stopIt(done) {
+    if (!done) {
+        // Show continue on the run button
+        $('#runTxt').hide();    
+        $('#stepTxt').hide();
+        $('#continueTxt').show(); 
+        
+        $('#stepItem').show();
+        $('#continueItem').hide();
+        $('#restartItem').show();
+        
+        // Make the run/step button continue the program
+        $('#runStepBtn').off("click", null, runStep);
+        $('#runStepBtn').on("click", null, "continue", runStep);
+    }
+    else {
+        // Show Run on the run button
+        $('#runTxt').show();    
+        $('#stepTxt').hide();
+        $('#continueTxt').hide(); 
+        
+        $('#stepItem').show();
+        $('#continueItem').hide();        
+        $('#restartItem').hide();
+        
+        // Make the run/step button step the program
+        $('#runStepBtn').off("click", null, runStep);
+        $('#runStepBtn').on("click", null, "run", runStep);
+    }
+    
     // Hide the stop button, show the run button
     $('.runbtn').show();
     $('.stopbtn').hide();
-
+    
     // Reenable the redeal button
     $('.redealbtn').removeClass('disabled');
-
-    // There is no longer a next line
-    //runState.nextLine = -1;
 
     // Stop any left over execution timer
     clearTimeout(runState.runTimer);
@@ -249,6 +289,40 @@ function stopIt() {
     // Display the last line executed
     $('.currentLine').addClass('lastLine');
     $('.currentLine').removeClass('currentLine');
+}
+
+/**
+ * Reset the HML execution
+ */
+function restartIt() {
+    // Show Run on the run button
+    $('#runTxt').show();    
+    $('#stepTxt').hide();
+    $('#continueTxt').hide(); 
+
+    $('#stepItem').show();
+    $('#continueItem').hide();
+    $('#restartItem').hide();
+    
+    // Make the run/step button step the program
+    $('#runStepBtn').off("click", null, runStep);
+    $('#runStepBtn').on("click", null, "run", runStep);
+
+    // Hide the stop button, show the run button
+    $('.runbtn').show();
+    $('.stopbtn').hide();
+    
+    // Reenable the redeal button
+    $('.redealbtn').removeClass('disabled');
+    
+    // Stop any left over execution timer
+    clearTimeout(runState.runTimer);
+
+    // Don't show the last line executed
+    $('.lastLine').removeClass('lastLine');
+    $('.currentLine').removeClass('currentLine');
+    
+    runState.reset();
 }
 
 /**
