@@ -307,7 +307,7 @@ function setLineNumbers() {
 
         // Add new linenumbers into the list
         for (let i = 1; i <= numLines; i++) {
-            $(this).append("<li><a href='#'>" + i + "</a></li>");
+            $(this).append("<li><a>" + i + "</a></li>");
         }
     });
 
@@ -322,21 +322,21 @@ function setLineNumbers() {
  * Fill the value and position dropdowns
  */
 function fillPositionDropdowns() {
-    let movePosHTML = "<li><a href='#'>Right Hand Position</a></li>\n\
-                                   <li><a href='#'>Left Hand Position</a></li>\n\
-                                   <li><a href='#'>Min Position</a></li>\n\
-                                   <li><a href='#'>Max Position</a></li>\n\
+    let movePosHTML = "<li><a>Right Hand Position</a></li>\n\
+                                   <li><a>Left Hand Position</a></li>\n\
+                                   <li><a>Min Position</a></li>\n\
+                                   <li><a>Max Position</a></li>\n\
                                    <li class='divider'></li>";
 
-    let itemStart = "<li><a href='#'>";
+    let itemStart = "<li><a>";
     let itemEnd = "</a></li>";
 
-    let jumpValHTML = "<li><a href='#'>Right Hand Card</a></li>\n\
-                                   <li><a href='#'>Left Hand Card</a></li>\n\
-                                   <li><a href='#'>Right Hand Position</a></li>\n\
-                                   <li><a href='#'>Left Hand Position</a></li>\n\
-                                   <li><a href='#'>Min Position</a></li>\n\
-                                   <li><a href='#'>Max Position</a></li>\n\
+    let jumpValHTML = "<li><a>Right Hand Card</a></li>\n\
+                                   <li><a>Left Hand Card</a></li>\n\
+                                   <li><a>Right Hand Position</a></li>\n\
+                                   <li><a>Left Hand Position</a></li>\n\
+                                   <li><a>Min Position</a></li>\n\
+                                   <li><a>Max Position</a></li>\n\
                                    <li class='divider'></li>";
 
     // Build move position menu - include all possible positions
