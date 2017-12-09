@@ -71,9 +71,21 @@
                                 <li onclick="deal(15);"><a>15 cards</a></li>
                                 <li onclick="deal(20);"><a>20 cards</a></li>
                                 <li class="divider"></li>
-                                <li onclick="ascending();"><a>Ascending</a></li>
-                                <li onclick="descending();"><a>Descending</a></li>
-                                <li onclick="random();"><a>Random</a></li>
+                                <li onclick="ascending();">
+                                    <div class="radio">
+                                        <label><input type="radio" name="optradio" id="ascRadio"><a>Ascending</a></label>
+                                    </div>
+                                </li>
+                                <li onclick="descending();">
+                                    <div class="radio">
+                                        <label><input type="radio" name="optradio" id="desRadio"><a>Descending</a></label>
+                                    </div>
+                                </li>
+                                <li onclick="random();">
+                                    <div class="radio">
+                                        <label><input type="radio" name="optradio" id="rndRadio"><a>Random</a></label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         Run Speed:&nbsp;

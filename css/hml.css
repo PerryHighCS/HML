@@ -35,6 +35,13 @@ li.active .tabButtons {
     display: none;
 }
 
+.dropdown-menu .radio input[type="radio"] {
+    position: initial;
+    margin-left: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 /* Move the content below the toolbox */
 .wrapper {
     position: absolute;
