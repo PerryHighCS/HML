@@ -17,6 +17,13 @@ window.onload = function () {
 
     let params = new URLSearchParams(window.location.search);
 
+    if (params.has('title')) {
+        $('#pgmTitle').attr('value', params.get('title'));
+    }
+    else {
+        $('#pgmTitle').attr('value', "");
+    }
+    
     // unlock the swap instruction if asked nicely
     if (params.has('swap')) {
         $('.instruction.swap').show();

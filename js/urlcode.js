@@ -88,6 +88,22 @@ function setURLDealDirection(dealDir) {
 }
 
 /**
+ * Update the page url to include the program title
+ * 
+ * @param {String} title the program's title
+ */
+function setURLTitle(title) {
+    if (title) {
+        // Add the code to the url
+        var url = new URL(window.location);
+        url.searchParams.set('title', title);
+
+        // Set the window url
+        window.history.replaceState(null, document.title, url);
+    }
+}
+
+/**
  * Build an array of card values from the card board
  * 
  * @returns {Array|Number}

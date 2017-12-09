@@ -299,8 +299,13 @@ tr.lastLine {
         display: none;
     }
 
-    #program thead {
+    .noPrint {
         display: none;
+    }
+    
+    #pgmTitle {
+        border: 0;
+        font-size: x-large;
     }
     
     #program {
