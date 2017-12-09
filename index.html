@@ -27,7 +27,7 @@
             </svg>
         </a>
         <!-- The main toolbar -->
-        <div class="toolbox">
+        <div class="toolbox" style="z-index: 1;">
             
             <!-- tabs for program code and running the program -->
             <ul class="nav nav-tabs">
@@ -70,6 +70,10 @@
                                 <li onclick="deal(12);"><a>12 cards</a></li>
                                 <li onclick="deal(15);"><a>15 cards</a></li>
                                 <li onclick="deal(20);"><a>20 cards</a></li>
+                                <li class="divider"></li>
+                                <li onclick="ascending();"><a>Ascending</a></li>
+                                <li onclick="descending();"><a>Descending</a></li>
+                                <li onclick="random();"><a>Random</a></li>
                             </ul>
                         </div>
                         Run Speed:&nbsp;

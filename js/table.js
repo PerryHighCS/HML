@@ -1,3 +1,4 @@
+var dealDirection = 0; // Default to random
 
 /**
  * Deal the cards
@@ -20,7 +21,7 @@ function deal(hand) {
     $("#cardboard").append(cardRow);
     $("#cardboard").append(handRow);
 
-    let deck = buildDeck(hand);
+    let deck = buildDeck(hand, dealDirection);
 
     // Pick a random suit
     runState.suit = "hdcs".charAt(Math.floor(Math.random() * 4));
@@ -80,13 +81,19 @@ function deal(hand) {
  * values), or a random deck
  * 
  * @param {String} hand
+ * @param {Number} direction, -descending, 0 random, +ascending 
  * @returns {Array|buildDeck.deck}
  */
-function buildDeck(hand) {
+function buildDeck(hand, direction) {
     let deck = [];
+    if (!direction) {
+        direction = 0;
+    }
 
-    if (hand === undefined || typeof (hand) === 'number') {
-        hand = hand || runState.numCards;
+    hand = hand || runState.numCards;
+
+    if (typeof (hand) === 'number') {
+
         let offset = 1;
 
         if (hand < 9) {
@@ -94,12 +101,19 @@ function buildDeck(hand) {
         }
 
         // set the deck to (hand + 1) unshuffled cards
-        for (let i = 0; i < hand + 1; i++) {
-            deck.push(i + offset);
+        if (direction === undefined || direction > 0) {
+            for (let i = 0; i < hand + 1; i++) {
+                deck.push(i + offset);
+            }
+        }
+        else {
+            for (let i = hand; i >= 0; i--) {
+                deck.push(i + offset);
+            }        
         }
 
-        // shuffle the deck
-        for (let i = 0; i < deck.length; i++) {
+        // shuffle the deck if it should be shuffled
+        for (let i = 0; (direction === 0) && i < deck.length; i++) {
             let newPos = Math.floor(Math.random() * deck.length);
 
             let card = deck[i];
@@ -203,4 +217,24 @@ function shiftHand(hand, dir) {
     // Show the hand in its new location
     $($('.handCell')[pos]).append(code);
     return true;
+}
+
+function ascending() {
+    dealDirection = 1;
+    
+    setURLDealDirection(dealDirection);
+    
+    deal();
+}
+
+function descending() {
+    dealDirection = -1;
+    setURLDealDirection(dealDirection);
+    deal();
+}
+
+function random() {
+    dealDirection = 0;
+    setURLDealDirection(dealDirection);
+    deal();
 }

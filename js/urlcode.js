@@ -51,10 +51,10 @@ function setURLCards(deck) {
  * @param {int|speed} runSpeed current step speed
  */
 function setURLSpeed(runSpeed) {
-    let params = new URLSearchParams(window.location.search);
+    var url = new URL(window.location);
     
     // Only post the speed to the url if a speed param is currently there
-    if (params.has('speed')) {
+    if (url.searchParams.has('speed')) {
         runSpeed = runSpeed || 50;
         
         // Add the code to the url
@@ -64,6 +64,27 @@ function setURLSpeed(runSpeed) {
         // Set the window url
         window.history.replaceState(null, document.title, url);
     }
+}
+
+
+/**
+ * Set the window url to include the deal direction.
+ * 
+ * @param {int} dealDir 0 - shuffled, -descending, +ascending
+ */
+function setURLDealDirection(dealDir) {
+    // Add the code to the url
+    var url = new URL(window.location);
+    
+    if (dealDir !== 0) {
+        url.searchParams.set('shuffle', dealDir);
+    }
+    else {
+        url.searchParams.delete('shuffle');
+    }
+    
+    // Set the window url
+    window.history.replaceState(null, document.title, url);
 }
 
 /**

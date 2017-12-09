@@ -43,6 +43,22 @@ window.onload = function () {
         setURLSpeed(speed);                                 // Post the speed back to the url
     }
 
+    // Load the shuffle direction from the url
+    if (params.has('shuffle')) {
+        if (params.get('shuffle') > 0) {
+            ascending();
+        }
+        else if (params.get('shuffle') < 0){
+            descending();
+        }
+        else {
+            random();
+        }
+    }
+    else {
+        random();
+    }
+    
     // Prepare the code display
     compactLines();
     setLineNumbers();
