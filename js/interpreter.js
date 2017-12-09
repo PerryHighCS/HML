@@ -75,20 +75,16 @@ var runState = {
             $(lines[runState.currentLine]).removeClass('currentLine');
         }
 
+        // Remember it as the new current line
+        runState.currentLine = runState.nextLine;
+
+        // Get the line of code
+        let line = $(lines[runState.currentLine]);
+
         // If the next line number is a legal line number
         if (runState.nextLine >= 0 && runState.nextLine < lines.length) {
             numSteps++;
             $('.stepCount').text(numSteps);
-
-            // Remember it as the new current line
-            runState.currentLine = runState.nextLine;
-
-            // Get the line of code
-            let line = $(lines[runState.currentLine]);
-
-            // Mark it as the current line
-            line.addClass('currentLine');
-            line[0].scrollIntoView();
 
             // Run the command
             if (doCommand(runState, line.find('.instruction')[0])) {
@@ -119,11 +115,22 @@ var runState = {
                     // Set the time to run the next instruction
                     runState.runTimer = setTimeout(runState.doNextLine, time);                
                 }
-            } else {
-                // If the command was not successful, or was a stop,
-                // stop running
-                stopIt(true);
-            }
+               
+                // Get the next line and remember it as the new current line
+                runState.currentLine = runState.nextLine;
+
+                // Get the line of code
+                let line = $(lines[runState.currentLine]);
+
+                // Mark it as the current line
+                line.addClass('currentLine');
+                line[0].scrollIntoView();
+                
+                } else {
+                    // If the command was not successful, or was a stop,
+                    // stop running
+                    stopIt(true);
+                }
         } else {
             // If the next line is not a legal line, stop running
             stopIt(true);
