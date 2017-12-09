@@ -17,6 +17,8 @@ function setURLCode() {
 
     // Set the window url
     window.history.replaceState(null, document.title, url);
+       
+    updateRunLink();
 }
 
 /**
@@ -44,6 +46,8 @@ function setURLCards(deck) {
 
        // Set the window url
        window.history.replaceState(null, document.title, url);
+      
+       updateRunLink();
    }
 }
 
@@ -65,6 +69,8 @@ function setURLSpeed(runSpeed) {
         
         // Set the window url
         window.history.replaceState(null, document.title, url);
+       
+        updateRunLink();
     }
 }
 
@@ -87,6 +93,8 @@ function setURLDealDirection(dealDir) {
     
     // Set the window url
     window.history.replaceState(null, document.title, url);
+    
+    updateRunLink();
 }
 
 /**
@@ -109,6 +117,8 @@ function setURLTitle(title) {
     url.searchParams.set('title', title);
     // Set the window url
     window.history.replaceState(null, document.title, url);
+    
+    updateRunLink();
 }
 
 /**
@@ -733,4 +743,18 @@ function expandPos(pos) {
         default:
             return pos;
     }
+}
+
+/**
+ * Update the printout run link
+ */
+function updateRunLink() {
+    let params = new URLSearchParams(window.location.search);
+    
+    let a = $('<a>');
+    a.text(params.has('code') ? params.get('code') : document.title);
+    a.prop('href', window.location);
+    let div = $('#runLink');
+    div.empty();
+    div.append(a);
 }

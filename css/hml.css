@@ -275,6 +275,12 @@ tr.lastLine {
     border: 0;
 }
 
+/* Set up items that only show on print */
+@media screen {
+    .printOnly {
+        display: none;
+    }
+}
 
 /* Set up printing to display code only */
 @media print {
@@ -324,5 +330,10 @@ tr.lastLine {
     
     .fillin {
         padding-right: 9px;
+    }
+    
+    /* don't print url after link */
+    a[href]:after {
+        content: none !important;
     }
 }
