@@ -93,16 +93,20 @@ function setURLDealDirection(dealDir) {
  * @param {String} title the program's title
  */
 function setURLTitle(title) {
-    if (title) {
-        // Add the code to the url
-        var url = new URL(window.location);
-        url.searchParams.set('title', title);
-        
+    // Add the code to the url
+    var url = new URL(window.location);
+    
+    if (title.trim()) {        
         document.title = title + ": The Human Machine Language";
-
-        // Set the window url
-        window.history.replaceState(null, document.title, url);
     }
+    else {
+        document.title = "The Human Machine Language";
+        
+    }
+    
+    url.searchParams.set('title', title);
+    // Set the window url
+    window.history.replaceState(null, document.title, url);
 }
 
 /**

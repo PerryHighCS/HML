@@ -245,7 +245,11 @@
                             <th colspan="2">
                                 <div class="form-group">
                                     <label for="pgmTitle" class="noPrint">Title:</label>
-                                    <input type="text" class="form-control" id="pgmTitle" oninput="setURLTitle(this.value);">
+                                    <input type="text" class="form-control"
+                                           id="pgmTitle" 
+                                           onchange="setURLTitle(this.value);"
+                                           onkeypress="setURLTitle(this.value);"
+                                           oninput="setURLTitle(this.value);">
                                 </div>
                             </th>
                         </tr>                         
