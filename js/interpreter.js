@@ -114,11 +114,11 @@ var runState = {
                     runState.runTimer = setTimeout(runState.doNextLine, time);                
                 }
                
-                // Get the next line and remember it as the new current line
+                // Get the next line num and remember it as the new current line
                 runState.currentLine = runState.nextLine;
 
                 // Get the line of code
-                let line = $(lines[runState.currentLine]);
+                line = $(lines[runState.currentLine]);
 
                 // Mark it as the current line
                 line.addClass('currentLine');
@@ -127,6 +127,11 @@ var runState = {
                 } else {
                     // If the command was not successful, or was a stop,
                     // stop running
+                     
+                    // Mark the command as the current line
+                    line.addClass('currentLine');
+                    line[0].scrollIntoView();
+                
                     stopIt(true);
                 }
         } else {
@@ -269,10 +274,6 @@ function stopIt(done) {
         // Make the run/step button continue the program
         $('#runStepBtn').off("click", null, runStep);
         $('#runStepBtn').on("click", null, "continue", runStep);      
-
-        // Display the last line executed
-        $('.currentLine').addClass('lastLine');
-        $('.currentLine').removeClass('currentLine');
     }
     else {
         // Show Run on the run button
@@ -292,6 +293,10 @@ function stopIt(done) {
         runState.nextLine = -1;
     }
     
+    // Display the last line executed
+    $('.currentLine').addClass('lastLine');
+    $('.currentLine').removeClass('currentLine');
+        
     // Hide the stop button, show the run button
     $('.runbtn').show();
     $('.stopbtn').hide();
