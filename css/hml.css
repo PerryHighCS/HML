@@ -101,13 +101,19 @@ li.active .tabButtons {
     padding-right: 5px;
 }
 
-/* remove the underline from fillins */
+/* remove the underline from fillins and dropdown-menus*/
 .fillin a,
 .fillin a:hover,
 .fillin a:active,
-.fillin a:focus {
+.fillin a:focus,
+.dropdown-menu a,
+.dropdown-menu a:hover,
+.dropdown-menu a:active,
+.dropdown-menu a:focus
+{
     text-decoration: none;
     color: #000;
+    cursor: pointer;
 }
 
 /* color the fillin blocks */
@@ -239,6 +245,7 @@ tr.lastLine {
     width: 100px;
     vertical-align: middle;
 }
+
 /* Fork on github corner mark */
 .github-corner:hover .octo-arm {
     animation:octocat-wave 560ms ease-in-out
