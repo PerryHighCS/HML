@@ -97,6 +97,8 @@ function setURLTitle(title) {
         // Add the code to the url
         var url = new URL(window.location);
         url.searchParams.set('title', title);
+        
+        document.title = title + ": The Human Machine Language";
 
         // Set the window url
         window.history.replaceState(null, document.title, url);
