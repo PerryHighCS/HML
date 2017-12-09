@@ -2,9 +2,9 @@
  * Copy all of the program instructions to the clipboard
  */
 function copyInstructions() {
-    let code = "";
+    let title = $('#pgmTitle').prop('value');
+    let code = title + "\r\n";
     let line = 1;
-
     
     // Get each program instruction
     $('#program .instruction').each(function () {
@@ -55,12 +55,12 @@ function copyInstructions() {
     let row = $('<tr>');
     html.prepend(row);
     
-    td = $('<th>').text("Run:");
+    td = $('<th>').prop('colspan', 2);
     td.css('border-bottom', '1px solid black');
     
-    row.append(td);
-    td = $('<td>');
-    td.css('border-bottom', '1px solid black');
+    let h = $('<h1>');
+    h.text(title);
+    td.append(h);
     
     let p = $('<p>');
     let a = $('<a>');
@@ -69,9 +69,7 @@ function copyInstructions() {
     td.append(p);
     row.append(td);
     p.append(a);
-        
-    console.log(html.prop('outerHTML'));
-    
+            
     var dt = new clipboard.DT();
     dt.setData("text/plain", code);
     dt.setData("text/html", html.prop('outerHTML'));
