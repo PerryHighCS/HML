@@ -1,3 +1,5 @@
+/* global instRow, caret, cardValString */
+
 /**
  * Update the page url to include the current program code
  */

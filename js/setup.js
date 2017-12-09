@@ -19,9 +19,11 @@ window.onload = function () {
 
     if (params.has('title')) {
         $('#pgmTitle').attr('value', params.get('title'));
+        document.title = params.get('title') + ": The Human Machine Language";
     }
     else {
         $('#pgmTitle').attr('value', "");
+        document.title = "The Human Machine Language";
     }
     
     // unlock the swap instruction if asked nicely
