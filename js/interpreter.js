@@ -69,11 +69,9 @@ var runState = {
         // Get all lines of code
         let lines = $('#program tbody tr');
 
-        // If there is a current line marked
-        if (runState.currentLine >= 0 && runState.currentLine < lines.length) {
-            // Remove the current line marker
-            $(lines[runState.currentLine]).removeClass('currentLine');
-        }
+        
+        // Remove the current line marker
+        $('.currentLine').removeClass('currentLine');
 
         // Remember it as the new current line
         runState.currentLine = runState.nextLine;
