@@ -41,7 +41,7 @@ var runState = {
 
             runState.reset();
             
-            runState.doNextLine(true);
+            //runState.doNextLine(true);
         }
     },
     
@@ -148,6 +148,10 @@ var runState = {
         // reinitialize hands
         moveHand(0, 0);
         moveHand(1, 1);
+                
+        // Highlight the first line of code
+        let firstLine = $('#program tbody tr')[0];
+        $(firstLine).addClass('currentLine');
     }
 };
 
@@ -266,7 +270,11 @@ function stopIt(done) {
         
         // Make the run/step button continue the program
         $('#runStepBtn').off("click", null, runStep);
-        $('#runStepBtn').on("click", null, "continue", runStep);
+        $('#runStepBtn').on("click", null, "continue", runStep);      
+
+        // Display the last line executed
+        $('.currentLine').addClass('lastLine');
+        $('.currentLine').removeClass('currentLine');
     }
     else {
         // Show Run on the run button
@@ -281,6 +289,9 @@ function stopIt(done) {
         // Make the run/step button step the program
         $('#runStepBtn').off("click", null, runStep);
         $('#runStepBtn').on("click", null, "run", runStep);
+        
+        // Set the starting line
+        runState.nextLine = -1;
     }
     
     // Hide the stop button, show the run button
@@ -292,10 +303,6 @@ function stopIt(done) {
 
     // Stop any left over execution timer
     clearTimeout(runState.runTimer);
-
-    // Display the last line executed
-    $('.currentLine').addClass('lastLine');
-    $('.currentLine').removeClass('currentLine');
 }
 
 /**
