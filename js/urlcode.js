@@ -757,4 +757,8 @@ function updateRunLink() {
     let div = $('#runLink');
     div.empty();
     div.append(a);
+    
+    let span = $('<span>');
+    span.addClass("glyphicon glyphicon-link");
+    a.append(span);
 }

@@ -69,6 +69,10 @@ function copyInstructions() {
     td.append(p);
     row.append(td);
     p.append(a);
+        
+    let span = $('<span>');
+    span.text("\u00a0\u27a4");
+    a.append(span);
             
     var dt = new clipboard.DT();
     dt.setData("text/plain", code);
