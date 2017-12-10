@@ -42,7 +42,34 @@ window.onload = function () {
     if (params.has('cards') && params.get('cards').length > 0) {
         deal(params.get('cards'));
     } else {
-        deal();
+        // Load the shuffle direction from the url
+        if (params.has('shuffle')) {
+            if (params.get('shuffle') > 0) {
+                ascending();
+                $('#ascRadio').prop('checked', true);
+                $('#desRadio').prop('checked', false);
+                $('#rndRadio').prop('checked', false);
+
+            }
+            else if (params.get('shuffle') < 0){
+                descending();
+                $('#ascRadio').prop('checked', false);
+                $('#desRadio').prop('checked', true);
+                $('#rndRadio').prop('checked', false);
+            }
+            else {
+                random();
+                $('#ascRadio').prop('checked', false);
+                $('#desRadio').prop('checked', false);
+                $('#rndRadio').prop('checked', true);
+            }
+        }
+        else {
+            random();
+            $('#ascRadio').prop('checked', false);
+            $('#desRadio').prop('checked', false);
+            $('#rndRadio').prop('checked', true);
+        }
     }
     
     // Load the execution speed from the url
@@ -52,34 +79,6 @@ window.onload = function () {
         setURLSpeed(speed);                                 // Post the speed back to the url
     }
 
-    // Load the shuffle direction from the url
-    if (params.has('shuffle')) {
-        if (params.get('shuffle') > 0) {
-            ascending();
-            $('#ascRadio').prop('checked', true);
-            $('#desRadio').prop('checked', false);
-            $('#rndRadio').prop('checked', false);
-            
-        }
-        else if (params.get('shuffle') < 0){
-            descending();
-            $('#ascRadio').prop('checked', false);
-            $('#desRadio').prop('checked', true);
-            $('#rndRadio').prop('checked', false);
-        }
-        else {
-            random();
-            $('#ascRadio').prop('checked', false);
-            $('#desRadio').prop('checked', false);
-            $('#rndRadio').prop('checked', true);
-        }
-    }
-    else {
-        random();
-        $('#ascRadio').prop('checked', false);
-        $('#desRadio').prop('checked', false);
-        $('#rndRadio').prop('checked', true);
-    }
     
     // Prepare the code display
     compactLines();
