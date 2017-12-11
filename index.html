@@ -28,7 +28,10 @@
         </a>
         <!-- The main toolbar -->
         <div class="toolbox" style="z-index: 1;">
-            
+            <!-- hidden select box for resizing the otherns -->
+            <select class="fillin" style="display: none" id="sizeTest">
+                <option id="templateOption" selected="selected"></option>
+            </select>
             <!-- tabs for program code and running the program -->
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#inst" draggable="false">Program It</a></li>
@@ -106,10 +109,7 @@
                     <div class="commands" 
                          ondrop="trashInstruction(event)" 
                          ondragover="allowDropInstruction(event)" >
-                        <b>Command Toolbox:</b>
-                        <select class="fillin" style="display: none" id="sizeTest">
-                            <option id="templateOption" selected="selected"></option>
-                        </select>
+                        <b>Command Toolbox:</b>                        
                         <img src="trash.png" id="trashcan" draggable="false"
                              ondblclick="deleteCode()" alt="trash can">
                         <div class="palette">
