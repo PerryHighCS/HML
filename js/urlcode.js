@@ -356,7 +356,7 @@ function buildJumpIf(target, val1, comp, val2) {
     }
     
     if (val2 !== 'x') {
-        setDropdown($(vals[1], val2));
+        setDropdown($(vals[1]), val2);
     }
 
     if (comp !== 'x') {      
