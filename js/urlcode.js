@@ -155,23 +155,23 @@ function instToCode(inst) {
         code = 'X';
     } else if (inst.is('.jump')) {
         code = 'J';
-        code += jumpTargetCode(inst.find('.linenum .dropdown-text').text().trim());
+        code += jumpTargetCode(inst.find('.linenum').val());
     } else if (inst.is('.jumpif')) {
-        let vals = inst.find('.value .dropdown-text');
+        let vals = inst.find('.value');
 
         code = 'I';
-        code += jumpTargetCode(inst.find('.linenum .dropdown-text').text().trim());
-        code += valCode($(vals[0]).text().trim());
-        code += compCode(inst.find('.comparison .dropdown-text').text().trim());
-        code += valCode($(vals[1]).text().trim());
+        code += jumpTargetCode(inst.find('.linenum').val());
+        code += valCode($(vals[0]).val());
+        code += compCode(inst.find('.comparison').val());
+        code += valCode($(vals[1]).val());
     } else if (inst.is('.shift')) {
         code = 'S';
-        code += handCode(inst.find('.hand .dropdown-text').text().trim());
-        code += dirCode(inst.find('.dir .dropdown-text').text().trim());
+        code += handCode(inst.find('.hand').val());
+        code += dirCode(inst.find('.dir').val());
     } else if (inst.is('.move')) {
         code = 'M';
-        code += handCode(inst.find('.hand .dropdown-text').text().trim());
-        code += posCode(inst.find('.pos .dropdown-text').text().trim());
+        code += handCode(inst.find('.hand').val());
+        code += posCode(inst.find('.pos').val());
     } else if (inst.is('.swap')) {
         code = 'W';
     }
@@ -300,11 +300,11 @@ function compCode(comp) {
             return "l";
         case ">":
             return "g";
-        case "\u2264":
+        case "<=":
             return "L";
-        case "\u2265":
+        case ">=":
             return "G";
-        case "\u2260":
+        case "!=":
             return "n";
         default:
             return "x";
@@ -490,8 +490,10 @@ function buildJump(target) {
     let inst = $('.palette .jump').clone();
 
     if (target !== 'x') {
-        inst.find('.linenum .dropdown-text').html(target +
-                caret);
+        let ln = inst.find('.linenum');
+        ln.val(target).attr('data', target);
+        
+        setDropdownWidth(ln, target);
     }
 
     return inst;
@@ -510,20 +512,34 @@ function buildJumpIf(target, val1, comp, val2) {
     let inst = $('.palette .jumpif').clone();
 
     if (target !== 'x') {
-        inst.find('.linenum .dropdown-text').html(target + caret);
+        let t = inst.find('.linenum');
+        t.val(target).attr('data', target);     
+        setDropdownWidth(t, target);
     }
 
-    let vals = inst.find('.value .dropdown-text');
+    let vals = inst.find('.value');
 
     if (val1 !== 'x') {
-        $(vals[0]).html(expandValue(val1) + caret);
+        let ev = expandValue(val1);
+        $(vals[0]).val(ev).attr('data', ev);
+        setDropdownWidth($(vals[0]), ev);
     }
     if (val2 !== 'x') {
-        $(vals[1]).html(expandValue(val2) + caret);
+        let ev = expandValue(val2);
+        $(vals[1]).val(ev).attr('data', ev);
+        setDropdownWidth($(vals[1]), ev);
     }
 
-    if (comp !== 'x') {
-        inst.find('.comparison .dropdown-text').html(comp + caret);
+    if (comp !== 'x') {      
+        let ev = expandValue(comp);
+        let c = inst.find('.comparison');
+        
+        c.val(ev).attr('data', ev);
+        c.find('option').each(function() {
+            $(this).attr('selected', this.value === ev);
+        });
+        
+        setDropdownWidth(c, ev);
     }
 
     return inst;
@@ -540,11 +556,27 @@ function buildShift(hand, dir) {
     let inst = $('.palette .shift').clone();
 
     if (hand !== 'x') {
-        inst.find('.hand .dropdown-text').html(expandHand(hand) + caret);
+        let ev = expandHand(hand);
+        let h = inst.find('.hand');
+         
+        h.val(ev).attr('data', ev);
+        h.find('option').each(function() {
+            $(this).attr('selected', this.value === ev);
+        });
+        
+        setDropdownWidth(h, ev);
     }
 
     if (dir !== 'x') {
-        inst.find('.dir .dropdown-text').html(expandDir(dir) + caret);
+        let ev = expandDir(dir);
+        let d = inst.find('.dir');
+        
+        d.val(ev).attr('data', ev);
+        d.find('option').each(function() {
+            $(this).attr('selected', this.value === ev);
+        });
+        
+        setDropdownWidth(d, ev);
     }
 
     return inst;
@@ -561,11 +593,27 @@ function buildMove(hand, pos) {
     let inst = $('.palette .move').clone();
 
     if (hand !== 'x') {
-        inst.find('.hand .dropdown-text').html(expandHand(hand) + caret);
+        let ev = expandHand(hand);
+        let h = inst.find('.hand');
+        
+        h.val(ev).attr('data', ev);
+        h.find('option').each(function() {
+            $(this).attr('selected', this.value === ev);
+        });
+        
+        setDropdownWidth(h, ev);
     }
 
     if (pos !== 'x') {
-        inst.find('.pos .dropdown-text').html(expandPos(pos) + caret);
+        let ev = expandPos(pos);
+        let p = inst.find('.pos');
+        
+        p.val(ev).attr('data', ev);
+        p.find('option').each(function() {
+            $(this).attr('selected', this.value === ev);
+        });
+        
+        setDropdownWidth(p, ev);
     }
 
     return inst;
@@ -607,15 +655,15 @@ function comparisonSymbol(comp) {
         case "e":
             return "=";
         case "l":
-            return "&lt;";
+            return "<";
         case "g":
-            return "&gt;";
+            return ">";
         case "L":
-            return "\u2264";
+            return "<=";
         case "G":
-            return "\u2265";
+            return ">=";
         case "n":
-            return "\u2260";
+            return "!=";
         default:
             return "x";
     }

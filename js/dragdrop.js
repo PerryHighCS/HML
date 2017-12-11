@@ -1,3 +1,5 @@
+/* global runState, instRow */
+
 /**
  * Allow an instruction to be dropped on this element
  * 
@@ -148,7 +150,7 @@ function dragCard(ev) {
     ev.dataTransfer.setData("text", text);
 }
 /**
- * Handle an instruction being dropped onto another element
+ * Handle a card being dropped onto another element
  * @param {DropEvent} ev
  */
 function dropCard(ev) {
@@ -240,12 +242,12 @@ function fixJumps(changeLine, delta) {
         // if this line is a jump instruction
         $(lines[i]).find('.jump, .jumpif').each(function () {
             // Find the linenum of the jump target
-            $(this).find('.fillin.linenum .dropdown-text').each(function () {
-                let oldnum = parseInt($(this).text());
+            $(this).find('.fillin.linenum').each(function () {
+                let oldnum = parseInt($(this).val());
 
                 // replace the linenum
                 if (!isNaN(oldnum) && oldnum >= changeLine) {
-                    $(this).html((oldnum + delta) + caret);
+                    $(this).val((oldnum + delta));
                 }
             });
 
@@ -277,22 +279,6 @@ function compactLines() {
 }
 
 /**
- * Add click handlers to all dropdown items that replace the text in
- * the dropdown with the selection
- */
-function addDropdownHandlers() {
-    // Find all dropdown items, set their click function
-    $("#program .dropdown-menu li a").click(function () {
-        // when an item is clicked, find the dropdown-text
-        $(this).parents(".dropdown").find('.dropdown-text')
-                // and fill it with the selected item
-                .html($(this).text() + caret);
-        // then update the URL
-        setURLCode();
-    });
-}
-
-/**
  * Set the available line numbers in all line number dropdowns and 
  * on all program lines
  */
@@ -301,13 +287,30 @@ function setLineNumbers() {
     let numLines = $("#program tbody tr").length;
 
     // For every linenum list item in the program
-    $(".linenum ul").each(function () {
+    $(".linenum").each(function () {
+        let cur = $(this).attr('data');
+        
         // Clear out all existing line numbers in the list
         $(this).empty();
-
+        
         // Add new linenumbers into the list
-        for (let i = 1; i <= numLines; i++) {
-            $(this).append("<li><a>" + i + "</a></li>");
+        for (let i = 0; i <= numLines; i++) {
+            let option = $('<option>');
+            
+            if (i === 0) {
+                option.val("Line #")
+                      .text("Line #")
+                      .css("display", "none");
+            }
+            else {
+                option.val("" + i)
+                      .text("" + i);
+            }
+            
+            if (option.val() === cur) {
+                option.attr("selected", "true");
+            }
+            $(this).append(option);
         }
     });
 
@@ -322,44 +325,73 @@ function setLineNumbers() {
  * Fill the value and position dropdowns
  */
 function fillPositionDropdowns() {
-    let movePosHTML = "<li><a>Right Hand Position</a></li>\n\
-                                   <li><a>Left Hand Position</a></li>\n\
-                                   <li><a>Min Position</a></li>\n\
-                                   <li><a>Max Position</a></li>\n\
-                                   <li class='divider'></li>";
-
-    let itemStart = "<li><a>";
-    let itemEnd = "</a></li>";
-
-    let jumpValHTML = "<li><a>Right Hand Card</a></li>\n\
-                                   <li><a>Left Hand Card</a></li>\n\
-                                   <li><a>Right Hand Position</a></li>\n\
-                                   <li><a>Left Hand Position</a></li>\n\
-                                   <li><a>Min Position</a></li>\n\
-                                   <li><a>Max Position</a></li>\n\
-                                   <li class='divider'></li>";
-
-    // Build move position menu - include all possible positions
+    let movePos = ["Position", "Right Hand Position", "Left Hand Position", "Min Position",
+                   "Max Position"];
+               
+    let jumpVal = ["Value", "Right Hand Card", "Left Hand Card", "Right Hand Position",
+                   "Left Hand Position", "Min Position", "Max Position"];
+               
+    // Add all possible positions to menu
     for (let i = 0; i < runState.numCards; i++) {
-        let movePosValItem = itemStart + i + itemEnd;
-        movePosHTML += movePosValItem;
+        movePos.push("" + i);
     }
 
-    let movePosMenu = $(movePosHTML);
-    let moveMenus = $('.fillin.pos ul.dropdown-menu');
-    moveMenus.empty();
-    moveMenus.append(movePosMenu);
+    // Build move position menus
+    let moveMenus = $('.fillin.pos');
+    moveMenus.each(function() {
+        let cur = $(this).attr('data');
+        
+        $(this).empty();
+        for (let i = 0; i < movePos.length; i++) {
+            let option = $('<option>');
 
-    // Fill jump-if positions/values
-    for (let i = 0; i <= runState.maxCard; i++) {
-        let jumpItem = itemStart + i + itemEnd;
-        jumpValHTML += jumpItem;
-    }
+            if (i === 0) {
+                option.css('display', 'none');
+            }
 
-    let jumpValMenu = $(jumpValHTML);
-    let jumpMenus = $('.fillin.value.fulllist ul.dropdown-menu');
-    jumpMenus.empty();
-    jumpMenus.append(jumpValMenu);
+            option.val(movePos[i])
+                  .text(movePos[i])
+                  .attr("selected", option.val() === cur);
+            
+            $(this).append(option);
+        }
+    });
+    
+    // Build Jump value menus
+    let jumpValMenus = $('.fillin.value');
+    
+    jumpValMenus.each(function() {  
+        let cur = $(this).attr('data');
+        
+        $(this).empty();
+
+        for (let i = 0; i < jumpVal.length; i++) {
+            let option = $('<option>');
+
+            if (i === 0) {
+                option.css('display', 'none');
+            }
+
+            option.val(jumpVal[i])
+                  .text(jumpVal[i])
+                  .attr("selected", option.val() === cur);
+            
+            $(this).append(option);
+        }
+        
+        if ($(this).is('.fulllist')) {
+            for (let i = 0; i <= runState.maxCard; i++) {
+                let option = $('<option>');
+
+                option.val("" + i)
+                      .text("" + i)
+                      .attr("selected", option.val() === cur);
+                
+                $(this).append(option);
+            }        
+        }
+    });   
+    
 }
 
 /**

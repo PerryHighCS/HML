@@ -40,7 +40,12 @@ function copyInstructions() {
         let c = $(this).clone();
 
         // Remove the dropdowns from the copy
-        c.find('ul').remove();
+        let dd = c.find('select');
+        dd.each(function () {
+           $(this).replaceWith($('<span style="font-weight: bold; text-decoration: underline;">').text($(this).find('option:selected').text())); 
+        });
+        
+        console.log(c[0]);
 
         // Add the line number and instruction text to the output code
         row.append($('<td>').text(c.contents().text().trim().replace(/\s+/g, ' ')));

@@ -328,12 +328,37 @@ tr.lastLine {
         display: none !important;
     }  
     
+    /*
     .fillin {
         padding-right: 9px;
     }
-    
+    */
+
+    /* Don't print the caret on a dropdown */
+    select {
+        /*for firefox*/
+        -moz-appearance: none;
+        /*for chrome*/
+        -webkit-appearance:none;
+    }
+
+    /*for IE10*/
+    select::-ms-expand {
+        display: none;
+    }
+
     /* don't print url after link */
     a[href]:after {
         content: none !important;
     }
+}
+
+select {
+  text-align: center;
+  text-align-last: center;
+  /* webkit*/
+}
+option {
+  text-align: left;
+  /* reset to left*/
 }

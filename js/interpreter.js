@@ -471,7 +471,7 @@ function doJumpIf(state, inst) {
  */
 function getJumpTarget(inst) {
     // Get the instructions target linenumber
-    let lineno = inst.find('.linenum .dropdown-text').text();
+    let lineno = inst.find('.linenum').val();
     lineno = parseInt(lineno);
 
     // If the target is invalid
@@ -497,10 +497,10 @@ function getCardOrPosValues(inst, state) {
     let invalid = false;
 
     // Find each value in the instruction
-    inst.find('.value .dropdown-text').each(function () {
+    inst.find('.value').each(function () {
         if (!invalid) {
             // Get the text for this value
-            let val = $(this).text().trim();
+            let val = $(this).val();
 
             // Determine the text for the value
             switch (val) {
@@ -561,7 +561,7 @@ function getCardOrPosValues(inst, state) {
  * @returns {String} the comparison character, null if invalid
  */
 function getComparison(inst) {
-    let comp = inst.find('.comparison .dropdown-text').text().trim();
+    let comp = inst.find('.comparison').val();
 
     switch (comp) {
         case "=":
@@ -639,7 +639,7 @@ function doMove(state, inst) {
  */
 function getHand(inst, command) {
     // Get the hand text
-    let hand = inst.find('.hand .dropdown-text').text().trim();
+    let hand = inst.find('.hand').val();
 
     // If a valid hand was set, return the appropriate value
     if (hand === "Right Hand") {
@@ -661,7 +661,7 @@ function getHand(inst, command) {
  */
 function getDir(inst) {
     // Get the direction text
-    let dir = inst.find('.dir .dropdown-text').text().trim();
+    let dir = inst.find('.dir').val();
 
     // If a valid direction was set, return the appropriate value
     if (dir === "Right") {
@@ -686,7 +686,7 @@ function getDir(inst) {
  */
 function getPosition(inst, state) {
     // Get the direction text
-    let pos = inst.find('.pos .dropdown-text').text().trim();
+    let pos = inst.find('.pos').val();
     let posNum = parseInt(pos);
 
     // If a valid direction was set, return the appropriate value

@@ -86,3 +86,30 @@ window.onload = function () {
     fillPositionDropdowns();
     addDropdownHandlers();
 };
+
+
+/**
+ * Add click handlers to all fillins that updates the url code
+ */
+function addDropdownHandlers() {
+    // Find all dropdown items, set their change function
+    $("#program .fillin").change(function () {
+        // Set the dropdown's data to the chosen value
+        $(this).attr('data', this.value);
+        
+        // Make sure the correct option is selected
+        let children = $(this).children('option');
+        for (let child of children) {
+            $(child).attr('selected', (this.value === child.value));
+        }
+        
+        setDropdownWidth($(this), $(this).find("option:selected").text());
+        // then update the URL
+        setURLCode();
+    });
+}
+
+function setDropdownWidth(dd, text) {
+    $('#templateOption').text(text);
+    dd.width($('#sizeTest').width() + 30);
+}

@@ -114,102 +114,72 @@
                             <!-- the SHIFT HAND instruction -->
                             <div class="instruction shift" draggable="true" ondragstart="dragInstruction(event)" >
                                 SHIFT 
-                                <div class="fillin hand dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Hand<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                      <li><a>Right Hand</a></li>
-                                      <li><a>Left Hand</a></li>
-                                    </ul>
-                                </div>
+                                <select class="fillin hand">
+                                    <option style="display: none;">Hand</option>
+                                    <option value="Right Hand">Right Hand</option>
+                                    <option value="Left Hand">Left Hand</option>
+                                </select>                                    
                                 TO THE 
-                                <div class="fillin dir dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Direction<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                      <li><a>Right</a></li>
-                                      <li><a>Left</a></li>
-                                    </ul>
-                                </div>
+                                <select class="fillin dir">
+                                    <option style="display: none;">Direction</option>
+                                    <option value="Right">Right</option>
+                                    <option  value="Left">Left</option>
+                                </select>                                
                             </div>
 
                             <!-- the MOVE HAND instruction -->
                             <div class="instruction move" draggable="true" ondragstart="dragInstruction(event)">
                                 MOVE 
-                                <div class="fillin hand dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Hand<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                      <li><a>Right Hand</a></li>
-                                      <li><a>Left Hand</a></li>
-                                    </ul>
-                                </div>
+                                <select class="fillin hand">
+                                    <option style="display: none;">Hand</option>
+                                    <option value="Right Hand">Right Hand</option>
+                                    <option value="Left Hand">Left Hand</option>
+                                </select>                                
                                 TO POSITION 
-                                <div class="fillin pos dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Position<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <!-- Positions filled dynamically -->
-                                    </ul>
-                                </div>
+                                <select class="fillin pos"> 
+                                    <option style="display: none;">Position</option>
+                                    <!-- Positions filled dynamically -->                                   
+                                </select>
                             </div>
 
                             <!-- the JUMP TO LINE instruction -->
                             <div class="instruction jump" draggable="true" ondragstart="dragInstruction(event)">
                                 JUMP TO LINE
-                                <div class="fillin linenum dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Line #<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                      <li><a>1</a></li>
-                                    </ul>
-                                </div>
+                                <select class="fillin linenum"> 
+                                    <option style="display: none;">Line #</option>
+                                    <!-- Positions filled dynamically -->                                   
+                                </select>
                             </div>
 
                             <!-- the JUMP-IF instruction -->
                             <div class="instruction jumpif" draggable="true" ondragstart="dragInstruction(event)">
                                 JUMP TO LINE
-                                <div class="fillin linenum dropdown">
-                                    <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Line #<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a>1</a></li>
-                                    </ul>
-                                </div>
+                                <select class="fillin linenum"> 
+                                    <option style="display: none;">Line #</option>
+                                    <!-- Positions filled dynamically -->                                   
+                                </select>
                                 IF
                                 <div class="condition">
                                     &nbsp;
-                                    <div class="fillin value dropdown">
-                                        <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Value<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a>Right Hand Card</a></li>
-                                            <li><a>Left Hand Card</a></li>
-                                            <li><a>Right Hand Position</a></li>
-                                            <li><a>Left Hand Position</a></li>
-                                        </ul>
-                                    </div>
+                                    <select class="fillin value"> 
+                                        <option style="display: none;">Value</option>
+                                        <!-- Values filled dynamically -->                                   
+                                    </select>
                                     
-                                    <div class="fillin comparison dropdown">
-                                        <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            compare<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a>&gt;</a></li>
-                                            <li><a>&lt;</a></li>
-                                            <li><a>=</a></li> 
-                                            <li><a>&ne;</a></li> 
-                                            <li><a>&le;</a></li>
-                                            <li><a>&ge;</a></li>  
-                                        </ul>
-                                    </div>
-                                     
-                                    <div class="fillin value fulllist dropdown">
-                                        <a class="dropdown-toggle dropdown-text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Value<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <!-- Menu filled dynamically -->
-                                        </ul>
-                                    </div>
+                                    <select class="fillin comparison"> 
+                                        <option style="display: none;">compare</option>
+                                        <option value=">">&gt;</option>
+                                        <option value="<">&lt;</option>
+                                        <option value="=">=</option>
+                                        <option value="!=">&ne;</option>
+                                        <option value="<=">&le;</option>
+                                        <option value=">=">&ge;</option>                             
+                                    </select>     
+                                    
+                                    <select class="fillin value fulllist"> 
+                                        <option style="display: none;">Value</option>
+                                        <!-- Values filled dynamically -->                                   
+                                    </select>
                                     &nbsp;
                                 </div>
                             </div>
@@ -223,6 +193,10 @@
                             <div class="instruction stop" draggable="true" ondragstart="dragInstruction(event)">
                                 STOP
                             </div>
+                            
+                            <select class="fillin" style="display: none" id="sizeTest">
+                                 <option id="templateOption" selected="selected"></option>
+                            </select>
                         </div>
                     </div>
                 </div>
