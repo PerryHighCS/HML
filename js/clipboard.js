@@ -12,8 +12,16 @@ function copyInstructions() {
         let c = $(this).clone();
 
         // Remove the dropdowns from the copy
-        c.find('ul').remove();
-
+        let dd = c.find('select');
+        dd.each(function () {
+            let optionText = $(this).children(':selected').text();
+            
+            let span = $('<span style="font-weight: bold; text-decoration: underline;">');
+            span.text(optionText);
+            
+           $(this).replaceWith(span);
+        });
+        
         // Add the line number and instruction text to the output code
         code += line + '\t';
         code += (c.contents().text().trim().replace(/\s+/g, ' '));
@@ -42,11 +50,14 @@ function copyInstructions() {
         // Remove the dropdowns from the copy
         let dd = c.find('select');
         dd.each(function () {
-           $(this).replaceWith($('<span style="font-weight: bold; text-decoration: underline;">').text($(this).find('option:selected').text())); 
+            let optionText = $(this).children(':selected').text();
+            
+            let span = $('<span style="font-weight: bold; text-decoration: underline;">');
+            span.text(optionText);
+            
+           $(this).replaceWith(span);
         });
         
-        console.log(c[0]);
-
         // Add the line number and instruction text to the output code
         row.append($('<td>').text(c.contents().text().trim().replace(/\s+/g, ' ')));
         

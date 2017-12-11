@@ -118,15 +118,15 @@
                             <div class="instruction shift" draggable="true" ondragstart="dragInstruction(event)" >
                                 SHIFT 
                                 <select class="fillin hand">
-                                    <option style="display: none;">Hand</option>
-                                    <option value="Right Hand">Right Hand</option>
-                                    <option value="Left Hand">Left Hand</option>
+                                    <option style="display: none;" value="x">Hand</option>
+                                    <option value="r">Right Hand</option>
+                                    <option value="l">Left Hand</option>
                                 </select>                                    
                                 TO THE 
                                 <select class="fillin dir">
-                                    <option style="display: none;">Direction</option>
-                                    <option value="Right">Right</option>
-                                    <option  value="Left">Left</option>
+                                    <option style="display: none;" value="x">Direction</option>
+                                    <option value="r">Right</option>
+                                    <option  value="l">Left</option>
                                 </select>                                
                             </div>
 
@@ -134,13 +134,13 @@
                             <div class="instruction move" draggable="true" ondragstart="dragInstruction(event)">
                                 MOVE 
                                 <select class="fillin hand">
-                                    <option style="display: none;">Hand</option>
-                                    <option value="Right Hand">Right Hand</option>
-                                    <option value="Left Hand">Left Hand</option>
+                                    <option style="display: none;" value="x">Hand</option>
+                                    <option value="r">Right Hand</option>
+                                    <option value="l">Left Hand</option>
                                 </select>                                
                                 TO POSITION 
                                 <select class="fillin pos"> 
-                                    <option style="display: none;">Position</option>
+                                    <option style="display: none;" value="x">Position</option>
                                     <!-- Positions filled dynamically -->                                   
                                 </select>
                             </div>
@@ -149,7 +149,7 @@
                             <div class="instruction jump" draggable="true" ondragstart="dragInstruction(event)">
                                 JUMP TO LINE
                                 <select class="fillin linenum"> 
-                                    <option style="display: none;">Line #</option>
+                                    <option style="display: none;" value="x">Line #</option>
                                     <!-- Positions filled dynamically -->                                   
                                 </select>
                             </div>
@@ -158,29 +158,29 @@
                             <div class="instruction jumpif" draggable="true" ondragstart="dragInstruction(event)">
                                 JUMP TO LINE
                                 <select class="fillin linenum"> 
-                                    <option style="display: none;">Line #</option>
+                                    <option style="display: none;" value="x">Line #</option>
                                     <!-- Positions filled dynamically -->                                   
                                 </select>
                                 IF
                                 <div class="condition">
                                     &nbsp;
                                     <select class="fillin value"> 
-                                        <option style="display: none;">Value</option>
+                                        <option style="display: none;" value="x">Value</option>
                                         <!-- Values filled dynamically -->                                   
                                     </select>
                                     
                                     <select class="fillin comparison"> 
-                                        <option style="display: none;">compare</option>
-                                        <option value=">">&gt;</option>
-                                        <option value="<">&lt;</option>
-                                        <option value="=">=</option>
-                                        <option value="!=">&ne;</option>
-                                        <option value="<=">&le;</option>
-                                        <option value=">=">&ge;</option>                             
+                                        <option style="display: none;" value="x">compare</option>
+                                        <option value="g">&gt;</option>
+                                        <option value="l">&lt;</option>
+                                        <option value="e">=</option>
+                                        <option value="n">&ne;</option>
+                                        <option value="L">&le;</option>
+                                        <option value="G">&ge;</option>                             
                                     </select>     
                                     
                                     <select class="fillin value fulllist"> 
-                                        <option style="display: none;">Value</option>
+                                        <option style="display: none;" value="x">Value</option>
                                         <!-- Values filled dynamically -->                                   
                                     </select>
                                     &nbsp;

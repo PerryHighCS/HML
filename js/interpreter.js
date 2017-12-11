@@ -423,30 +423,30 @@ function doJumpIf(state, inst) {
     }
 
     // Determine the comparison to perform
-    let comp = getComparison(inst);
-    if (comp === null) {
-        return false;
-    }
+    let comp = inst.find('.comparison').val();
     // Perform the comparison to determine if we should jump
     switch (comp) {
-        case "=":
+        case "e":
             shouldJump = values[0] === values[1];
             break;
-        case "!=":
+        case "n":
             shouldJump = values[0] !== values[1];
             break;
-        case "<":
+        case "l":
             shouldJump = values[0] < values[1];
             break;
-        case ">":
+        case "g":
             shouldJump = values[0] > values[1];
             break;
-        case ">=":
+        case "G":
             shouldJump = values[0] >= values[1];
             break;
-        case "<=":
+        case "L":
             shouldJump = values[0] <= values[1];
             break;
+        default:
+            alert("You need to set the comparison operator.");
+            return false;
     }
 
     // If we should jump, calculate the new line
@@ -504,29 +504,29 @@ function getCardOrPosValues(inst, state) {
 
             // Determine the text for the value
             switch (val) {
-                case ("Right Hand Card"):
+                case ("R"):
                     // Use the value of the card the right hand is touching
                     val = $($('.cards .cardItem')[state.rHand]).attr('value');
                     values.push(parseInt(val));
                     break;
-                case ("Left Hand Card"):
+                case ("L"):
                     // Use the value of the card the left hand is touching
                     val = $($('.cards .cardItem')[state.lHand]).attr('value');
                     values.push(parseInt(val));
                     break;
-                case ("Right Hand Position"):
+                case ("r"):
                     // Use the value of the position of the right hand
                     values.push(state.rHand);
                     break;
-                case ("Left Hand Position"):
+                case ("l"):
                     // Use the value of the position of the left hand
                     values.push(state.lHand);
                     break;
-                case ("Min Position"):
+                case ("i"):
                     // Use the minimum position
                     values.push(0);
                     break;
-                case ("Max Position"):
+                case ("a"):
                     // Use the minimum position
                     values.push(state.numCards - 1);
                     break;
@@ -552,34 +552,6 @@ function getCardOrPosValues(inst, state) {
 
     // Otherwise, return the valid values
     return values;
-}
-
-/**
- * Get the comparison in an instruction
- * 
- * @param {jQuery} inst the jump-if instruction
- * @returns {String} the comparison character, null if invalid
- */
-function getComparison(inst) {
-    let comp = inst.find('.comparison').val();
-
-    switch (comp) {
-        case "=":
-            return "=";
-        case "<":
-            return "<";
-        case ">":
-            return ">";
-        case "\u2264":
-            return "<=";
-        case "\u2265":
-            return ">=";
-        case "\u2260":
-            return "!=";
-        default:
-            alert("You need to set the comparison operator.");
-            return null;
-    }
 }
 
 /**
@@ -642,9 +614,9 @@ function getHand(inst, command) {
     let hand = inst.find('.hand').val();
 
     // If a valid hand was set, return the appropriate value
-    if (hand === "Right Hand") {
+    if (hand === "r") {
         return 1;
-    } else if (hand === "Left Hand") {
+    } else if (hand === "l") {
         return 0;
     }
 
@@ -664,9 +636,9 @@ function getDir(inst) {
     let dir = inst.find('.dir').val();
 
     // If a valid direction was set, return the appropriate value
-    if (dir === "Right") {
+    if (dir === "r") {
         return 1;
-    } else if (dir === "Left") {
+    } else if (dir === "l") {
         return -1;
     }
 
@@ -690,13 +662,13 @@ function getPosition(inst, state) {
     let posNum = parseInt(pos);
 
     // If a valid direction was set, return the appropriate value
-    if (pos === "Right Hand Position") {
+    if (pos === "r") {
         return state.rHand;
-    } else if (pos === "Left Hand Position") {
+    } else if (pos === "l") {
         return state.lHand;
-    } else if (pos === "Min Position") {
+    } else if (pos === "i") {
         return 0;
-    } else if (pos === "Max Position") {
+    } else if (pos === "a") {
         return state.numCards - 1;
     } else if (!isNaN(posNum)) {
         return posNum;
