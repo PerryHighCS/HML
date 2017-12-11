@@ -78,6 +78,13 @@ window.onload = function () {
         document.getElementById("runSlider").value = speed; // Set the speed slider to the provided speed
         setURLSpeed(speed);                                 // Post the speed back to the url
     }
+    
+    // Shrink fillins to fit their contents
+    $('.palette .fillin').each(function() {
+        let item = $(this);
+        let text = item.children('option:selected').text();
+        setDropdownWidth(item, text);
+    });
 
     
     // Prepare the code display
@@ -93,7 +100,7 @@ window.onload = function () {
  */
 function addDropdownHandlers() {
     // Find all dropdown items, set their change function
-    $("#program .fillin").change(function () {
+    $(".fillin").change(function () {
         // Set the dropdown's data to the chosen value
         $(this).attr('data', this.value);
         
@@ -111,5 +118,6 @@ function addDropdownHandlers() {
 
 function setDropdownWidth(dd, text) {
     $('#templateOption').text(text);
+        
     dd.width($('#sizeTest').width() + 30);
 }

@@ -107,6 +107,9 @@
                          ondrop="trashInstruction(event)" 
                          ondragover="allowDropInstruction(event)" >
                         <b>Command Toolbox:</b>
+                        <select class="fillin" style="display: none" id="sizeTest">
+                            <option id="templateOption" selected="selected"></option>
+                        </select>
                         <img src="trash.png" id="trashcan" draggable="false"
                              ondblclick="deleteCode()" alt="trash can">
                         <div class="palette">
@@ -193,11 +196,7 @@
                             <div class="instruction stop" draggable="true" ondragstart="dragInstruction(event)">
                                 STOP
                             </div>
-                            
-                            <select class="fillin" style="display: none" id="sizeTest">
-                                 <option id="templateOption" selected="selected"></option>
-                            </select>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
                 

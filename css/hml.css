@@ -104,8 +104,8 @@ li.active .tabButtons {
     border-radius: .5em;
     vertical-align: middle;
     padding: 2px;
-    padding-left: 8px;
-    padding-right: 5px;
+    /*padding-left: 8px;
+    padding-right: 5px;*/
 }
 
 /* remove the underline from fillins and dropdown-menus*/
