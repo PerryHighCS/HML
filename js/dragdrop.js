@@ -298,7 +298,7 @@ function setLineNumbers() {
             let option = $('<option>');
             
             if (i === 0) {
-                option.val("Line #")
+                option.val("x")
                       .text("Line #")
                       .css("display", "none");
             }
@@ -310,6 +310,7 @@ function setLineNumbers() {
             if (option.val() === cur) {
                 option.attr("selected", "true");
             }
+            
             $(this).append(option);
         }
     });
@@ -327,10 +328,12 @@ function setLineNumbers() {
 function fillPositionDropdowns() {
     let movePos = ["Position", "Right Hand Position", "Left Hand Position", "Min Position",
                    "Max Position"];
+    let moveVal = ["x", "r", "l", "i", "a"];
                
-    let jumpVal = ["Value", "Right Hand Card", "Left Hand Card", "Right Hand Position",
+    let jumpList = ["Value", "Right Hand Card", "Left Hand Card", "Right Hand Position",
                    "Left Hand Position", "Min Position", "Max Position"];
-               
+    let jumpVal = ["x", "R", "L", "r", "l", "i", "a"];
+    
     // Add all possible positions to menu
     for (let i = 0; i < runState.numCards; i++) {
         movePos.push("" + i);
@@ -349,12 +352,15 @@ function fillPositionDropdowns() {
                 option.css('display', 'none');
             }
 
-            option.val(movePos[i])
+            option.val(moveVal[i])
                   .text(movePos[i])
                   .attr("selected", option.val() === cur);
             
             $(this).append(option);
         }
+        
+        let text = $(this).find('option:selected').text();
+        setDropdownWidth($(this), text);
     });
     
     // Build Jump value menus
@@ -365,7 +371,7 @@ function fillPositionDropdowns() {
         
         $(this).empty();
 
-        for (let i = 0; i < jumpVal.length; i++) {
+        for (let i = 0; i < jumpList.length; i++) {
             let option = $('<option>');
 
             if (i === 0) {
@@ -373,7 +379,7 @@ function fillPositionDropdowns() {
             }
 
             option.val(jumpVal[i])
-                  .text(jumpVal[i])
+                  .text(jumpList[i])
                   .attr("selected", option.val() === cur);
             
             $(this).append(option);
@@ -383,13 +389,17 @@ function fillPositionDropdowns() {
             for (let i = 0; i <= runState.maxCard; i++) {
                 let option = $('<option>');
 
-                option.val("" + i)
-                      .text("" + i)
+                option.val(i)
+                      .text(i)
                       .attr("selected", option.val() === cur);
                 
                 $(this).append(option);
             }        
         }
+        
+        
+        let text = $(this).find('option:selected').text();
+        setDropdownWidth($(this), text);
     });   
     
 }

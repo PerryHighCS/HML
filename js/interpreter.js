@@ -429,22 +429,22 @@ function doJumpIf(state, inst) {
     }
     // Perform the comparison to determine if we should jump
     switch (comp) {
-        case "=":
+        case "e":
             shouldJump = values[0] === values[1];
             break;
-        case "!=":
+        case "n":
             shouldJump = values[0] !== values[1];
             break;
-        case "<":
+        case "l":
             shouldJump = values[0] < values[1];
             break;
-        case ">":
+        case "g":
             shouldJump = values[0] > values[1];
             break;
-        case ">=":
+        case "G":
             shouldJump = values[0] >= values[1];
             break;
-        case "<=":
+        case "L":
             shouldJump = values[0] <= values[1];
             break;
     }
