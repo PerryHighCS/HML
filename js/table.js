@@ -221,6 +221,9 @@ function shiftHand(hand, dir) {
     return true;
 }
 
+/**
+ * Redeal the cards in ascending order
+ */
 function ascending() {
     dealDirection = 1;
     
@@ -229,12 +232,18 @@ function ascending() {
     deal();
 }
 
+/**
+ * Redeal the cards in descending order
+ */
 function descending() {
     dealDirection = -1;
     setURLDealDirection(dealDirection);
     deal();
 }
 
+/**
+ * Redeal the cards in shuffled order
+ */
 function random() {
     dealDirection = 0;
     setURLDealDirection(dealDirection);

@@ -5,9 +5,6 @@ var instRow = "<tr><td class='linenumcell'>" +
         "ondragover='allowDropInstruction(event)'>" +
         "</td></tr>";
 
-// The html for the drop-down caret
-var caret = '<span class="caret"></span>';
-
 // The url symbols for 21 card values
 var cardValString = 'xa234567890jqkbcdefghi';
 
@@ -110,12 +107,19 @@ function addDropdownHandlers() {
             $(child).attr('selected', (this.value === child.value));
         }
         
+        // Resize the dropdown to fit the selected text        
         setDropdownWidth($(this), $(this).find("option:selected").text());
         // then update the URL
         setURLCode();
     });
 }
 
+/**
+ * Calculate and set the width of a dropdown to fit its text
+ * 
+ * @param {type} dd - the dropdown to modify
+ * @param {type} text - the text to fit
+ */
 function setDropdownWidth(dd, text) {
     $('#templateOption').text(text);
         

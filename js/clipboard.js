@@ -18,13 +18,13 @@ function copyInstructions() {
         dd.each(function () {
             let optionText = $(this).children(':selected').text();
             
-            let span = $('<span style="font-weight: bold; text-decoration: underline;">');
+            let span = $('<span>');
             span.text(optionText);
             
            $(this).replaceWith(span);
         });
         
-        // Add the line number and instruction text to the output code
+        // Add the instruction text to the output code
         code += line + '\t';
         code += (c.contents().text().trim().replace(/\s+/g, ' '));
         code += '\r\n';
@@ -54,13 +54,13 @@ function copyInstructions() {
         dd.each(function () {
             let optionText = $(this).children(':selected').text();
             
-            let span = $('<span style="font-weight: bold; text-decoration: underline;">');
+            let span = $('<span>');
             span.text(optionText);
             
            $(this).replaceWith(span);
         });
         
-        // Add the line number and instruction text to the output code
+        // Add the instruction text to the output code
         row.append($('<td>').text(c.contents().text().trim().replace(/\s+/g, ' ')));
         
         // Convert the program instruction into serialized code
@@ -70,31 +70,29 @@ function copyInstructions() {
         line++;
     });
     
+    // Add a header row
     let row = $('<tr>');
     html.prepend(row);
-    
     td = $('<th>').prop('colspan', 2);
     td.css('border-bottom', '1px solid black');
     
+    // Add the program title to the header
     let h = $('<h1>');
     h.text(title);
     td.append(h);
     
+    // Add a link to run the program to the header
     let p = $('<p>');
     let a = $('<a>');
     a.prop("href", window.location);
-    a.text(serialized);
+    a.text(serialized + "\u00a0\u27a4");
     td.append(p);
     row.append(td);
     p.append(a);
-        
-    let span = $('<span>');
-    span.text("\u00a0\u27a4");
-    a.append(span);
-            
+
+    // Copy the plain text and html to the clipboard
     var dt = new clipboard.DT();
     dt.setData("text/plain", code);
-    dt.setData("text/html", html.prop('outerHTML'));
-    
+    dt.setData("text/html", html.prop('outerHTML'));    
     clipboard.write(dt);
 }

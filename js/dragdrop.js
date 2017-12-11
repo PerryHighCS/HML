@@ -385,6 +385,7 @@ function fillPositionDropdowns() {
             $(this).append(option);
         }
         
+        // fulllists also have all of the possible card positions / values
         if ($(this).is('.fulllist')) {
             for (let i = 0; i <= runState.maxCard; i++) {
                 let option = $('<option>');
@@ -397,7 +398,7 @@ function fillPositionDropdowns() {
             }        
         }
         
-        
+        // Resize the width of this dropdown to fit the text it contains
         let text = $(this).find('option:selected').text();
         setDropdownWidth($(this), text);
     });   
