@@ -1,3 +1,5 @@
+/* global runState, cardValString */
+
 var dealDirection = 0; // Default to random
 
 /**
@@ -81,7 +83,7 @@ function deal(hand) {
  * values), or a random deck
  * 
  * @param {String} hand
- * @param {Number} direction, -descending, 0 random, +ascending 
+ * @param {Number} direction -descending, 0 random, +ascending 
  * @returns {Array|buildDeck.deck}
  */
 function buildDeck(hand, direction) {

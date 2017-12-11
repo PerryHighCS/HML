@@ -1,4 +1,4 @@
-/* global instRow, caret, cardValString */
+/* global instRow, cardValString */
 
 /**
  * Update the page url to include the current program code
@@ -433,12 +433,11 @@ function buildMove(hand, pos) {
  * @returns {String|jQuery} The text of the dropdown item selected
  */
 function setDropdown(d, val) {
-    let text = "";
-    
     // Set the dropdown's value and data
     d.val(val)
      .attr('data', val);
     
+    // Select the proper child
     let sel = d.children('option[value="' + val + '"]');
     sel.attr('selected', true);
     

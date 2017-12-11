@@ -1,3 +1,5 @@
+/* global clipboard */
+
 /**
  * Copy all of the program instructions to the clipboard
  */
