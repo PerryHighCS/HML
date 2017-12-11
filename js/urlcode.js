@@ -439,9 +439,10 @@ function setDropdown(d, val) {
     d.val(val)
      .attr('data', val);
     
-    return d.find('option[value="' + val + '"]').text();
-   
-    return text;
+    let sel = d.children('option[value="' + val + '"]');
+    sel.attr('selected', true);
+    
+    return sel.text();
 }
 
 /**
