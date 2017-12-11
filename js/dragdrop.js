@@ -337,6 +337,7 @@ function fillPositionDropdowns() {
     // Add all possible positions to menu
     for (let i = 0; i < runState.numCards; i++) {
         movePos.push("" + i);
+        moveVal.push("" + i);
     }
 
     // Build move position menus
@@ -364,13 +365,11 @@ function fillPositionDropdowns() {
     });
     
     // Build Jump value menus
-    let jumpValMenus = $('.fillin.value');
-    
+    let jumpValMenus = $('.fillin.value');    
     jumpValMenus.each(function() {  
         let cur = $(this).attr('data');
         
         $(this).empty();
-
         for (let i = 0; i < jumpList.length; i++) {
             let option = $('<option>');
 
@@ -401,8 +400,7 @@ function fillPositionDropdowns() {
         // Resize the width of this dropdown to fit the text it contains
         let text = $(this).find('option:selected').text();
         setDropdownWidth($(this), text);
-    });   
-    
+    });       
 }
 
 /**

@@ -419,7 +419,6 @@ function buildMove(hand, pos) {
         let p = inst.find('.pos');
         
         text = setDropdown(p, pos);
-        setDropdownWidth(p, text);
     }
 
     return inst;

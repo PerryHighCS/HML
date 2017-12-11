@@ -100,11 +100,12 @@ function addDropdownHandlers() {
     $(".fillin").change(function () {
         // Set the dropdown's data to the chosen value
         $(this).attr('data', this.value);
+        let value = this.value;
         
         // Make sure the correct option is selected
         let children = $(this).children('option');
         for (let child of children) {
-            $(child).attr('selected', (this.value === child.value));
+            $(child).attr('selected', (value === child.value));
         }
         
         // Resize the dropdown to fit the selected text        
