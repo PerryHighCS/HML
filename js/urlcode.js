@@ -16,7 +16,7 @@ function setURLCode() {
     url.searchParams.set('code', code);
 
     // Set the window url
-    window.history.replaceState(null, document.title, url);
+    window.history.replaceState(null, document.title, url.toString());
        
     updateRunLink();
 }
@@ -45,7 +45,7 @@ function setURLCards(deck) {
        url.searchParams.set('cards', cards);
 
        // Set the window url
-       window.history.replaceState(null, document.title, url);
+       window.history.replaceState(null, document.title, url.toString());
       
        updateRunLink();
    }
@@ -68,7 +68,7 @@ function setURLSpeed(runSpeed) {
         url.searchParams.set('speed', runSpeed);
         
         // Set the window url
-        window.history.replaceState(null, document.title, url);
+        window.history.replaceState(null, document.title, url.toString());
        
         updateRunLink();
     }
@@ -92,7 +92,7 @@ function setURLDealDirection(dealDir) {
     }
     
     // Set the window url
-    window.history.replaceState(null, document.title, url);
+    window.history.replaceState(null, document.title, url.toString());
     
     updateRunLink();
 }
@@ -116,7 +116,7 @@ function setURLTitle(title) {
     
     url.searchParams.set('title', title);
     // Set the window url
-    window.history.replaceState(null, document.title, url);
+    window.history.replaceState(null, document.title, url.toString());
     
     updateRunLink();
 }
