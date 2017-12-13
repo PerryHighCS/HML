@@ -449,14 +449,8 @@ function setDropdown(d, val) {
 function updateRunLink() {
     let params = new URLSearchParams(window.location.search);
     
-    let a = $('<a>');
-    a.text(params.has('code') ? params.get('code') : document.title);
+    let a = $('#runLink');
     a.prop('href', window.location);
-    let div = $('#runLink');
-    div.empty();
-    div.append(a);
-    
-    let span = $('<span>');
-    span.addClass("glyphicon glyphicon-link");
-    a.append(span);
+    let div = $('#runLinkText');
+    div.text(params.has('code') ? params.get('code') : document.title);
 }

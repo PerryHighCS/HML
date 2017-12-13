@@ -24,7 +24,8 @@ window.onload = function () {
     }
     
     // unlock the swap instruction if asked nicely
-    if (params.has('swap')) {
+    if (params.has('swap') || (
+            params.has('code') && params.get('code').includes('W'))) {
         $('.instruction.swap').show();
     } else {
         $('.instruction.swap').hide();
