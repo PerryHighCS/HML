@@ -15,6 +15,7 @@
         
         <!-- polyfill -->
         <script src="js/url-search-parms.js"></script>
+        <script src="js/DragDropTouch.js"></script>
     </head>
     <body>
         <a href="https://github.com/PerryHighCS/HML" class="github-corner" aria-label="View source on Github" draggable="false">
@@ -228,7 +229,12 @@
                                            onkeypress="setURLTitle(this.value);"
                                            oninput="setURLTitle(this.value);">
                                 </div>
-                                <div class="printOnly" id="runLink"></div>
+                                <div class="printOnly">
+                                    <a id="runLink">
+                                        <span id="runLinkText"></span>&nbsp;
+                                        <span class="glyphicon glyphicon-share"></span>
+                                    </a>
+                                </div>
                             </th>
                         </tr>                         
                         <tr class="noPrint">
