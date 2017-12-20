@@ -247,7 +247,7 @@ function fixJumps(changeLine, delta) {
 
                 // replace the linenum
                 if (!isNaN(oldnum) && oldnum >= changeLine) {
-                    $(this).val((oldnum + delta));
+                    setDropdown($(this), oldnum + delta);
                 }
             });
 
