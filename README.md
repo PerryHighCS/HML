@@ -13,7 +13,7 @@ that can be rearranged on a template.
 ## Cloning / Copying
 
 This tool is designed to be served statically from a web server, it is being
-served via GitHub pages at https://perryma.tk/HML
+served via GitHub pages at https://perryhighcs.github.io/HML/
 
 You can make your own copy by clicking on the Fork button above. This will make 
 a copy of the HML in your GitHub account. If you then click on the Settings
@@ -37,7 +37,7 @@ Instructions can be copied by holding control while dragging and dropping
 them.
 
 The Swap instruction can be added to the tool palette by adding ?swap to the
-end of the url: https://perryma.tk/HML/?swap
+end of the url: https://perryhighcs.github.io/HML/?swap
 
 As instructions are added to the program, the URL will update to include a
 code parameter. This means that working programs (and programs in progress)
